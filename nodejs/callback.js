@@ -1,9 +1,3 @@
-var express = require('express');
-var app = express();
-app.use(require('body-parser').json({
-  limit: '10kb'
-}));
-
 var ETH_CONFIRMATIONS = 3;
 
 app.post('/callback/:id', function (req, res) {
@@ -25,13 +19,4 @@ app.post('/callback/:id', function (req, res) {
     res.send('error');
   }
 
-});
-
-app.get('/pay', function(req, res) {
-  require('./pay')();
-  res.send('ok');
-}) ;
-
-app.listen(3001, function () {
-  console.log('App listening on port 3001');
 });
