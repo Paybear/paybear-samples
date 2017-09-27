@@ -1,9 +1,9 @@
 <h3>Create payment request</h3>
-<h4>Use Get query to create payment request:</h4>
+<h4>Use GET query to create payment request:</h4>
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
-            <td>https://api.paybear.io/v1/eth/payment/{payout_address=""}/{callback_url=urlencode("")}?fee_level= {slow | normal | fast | flash}</td>
+            <td>https://api.paybear.io/v1/eth/payment/{payout_address}/{callback_url}</td>
         </tr>
     </tbody>
 </table>
@@ -11,27 +11,28 @@
 <table>
   <tbody>
   <tr>
-    <td>{payout_address}</td>
+    <td>payout_address</td>
     <td>Your address for payment</td>
   </tr>
   <tr>
-      <td>{callback_url}</td>
+      <td>callback_url</td>
       <td>Your server callback url for process payment status</td>
   </tr>
   <tr>
-    <td>{fee_level}</td>
+    <td>fee_level</td>
     <td>Fee level, optional, default "normal"</td>
   </tr>
 </tbody></table>
-<h4>Fee levels cost:</h4>
+<h4>Fee levels for Ethereum:</h4>
 <table>
-    <tr><td>Slow</td><td>1 GWei</td></tr>
-    <tr><td>Normal</td><td>4 GWei</td></tr>
-    <tr><td>Fast</td><td>20 GWei</td></tr>
-    <tr><td>Flash</td><td>40 GWei</td></tr>
+    <tr><td>Parameter</td><td><a href="http://ethgasstation.info/FAQpage.php">Gas price</a></td><td>Time</td></tr>
+    <tr><td>Slow</td><td>1 GWei</td><td>~10 min</td></tr>
+    <tr><td>Normal (default)</td><td>4 GWei</td><td>~3 min</td></tr>
+    <tr><td>Fast</td><td>20 GWei</td><td>~2 min</td></tr>
+    <tr><td>Flash</td><td>40 GWei</td><td>~1 min</td></tr>
 </table>
 <h4>Response:</h4>
-<p>As a response generated 2 values: address for receive payment, and invoice.</p>
+<p>The API always responds with a JSON string. [data] collection contains the important values: [address] is the payment address to show to the customer, [invoice] is our inner payment identifier, keep it in a safe place and never disclose to your clients.</p>
 <h4>Response example:</h4>
 <p>
 
@@ -71,51 +72,31 @@ REPLY="${encoded}"
 }
 
 rawurlencode "http://www.change.me/callback.php"
-curl "https://api.paybear.io/v1/eth/payment/0x39EE76948d238Fad2b750998F8A38d80c73c7Cd7/${REPLY}?fee_level=slow"
+curl "https://api.paybear.io/v1/eth/payment/0x39EE76948d238Fad2b750998F8A38d80c73c7Cd7/${REPLY}?fee_level=fast"
 ```
+<h4>Other examples</h4>
+<a href="php">PHP</a><br>
+<a href="nodejs">NodeJS</a><br>
+<a href="rails">Ruby on Rails</a><br>
 
-<h3>Call back</h3>
-<h4>Input:</h4>
-<table>
-  <tbody>
-  <tr>
-    <td>'GET' {id}</td>
-    <td>Order id</td>
-  </tr>
-  <tr>
-      <td>'POST' {confirmations}</td>
-      <td>Count confirmations</td>
-  </tr>
-  <tr>
-      <td>'POST' {inTransaction->amount}</td>
-      <td>Amount of coins</td>
-    </tr>
-  <tr>
-      <td>'POST' {invoice}</td>
-      <td>Invoice id</td>
-  </tr>
-</tbody></table>
-<h4>Input example:</h4>
+<h3>Callback</h3>
+A callback is sent every time a new block is mined. To stop further callbacks, reply with the invoice ID. See example below.
+<h4>Callback example:</h4>
 
 ```json
 {
-    "invoice": "052387b66bb93515a36ca4c099e44ebb"
+    "invoice": "7e691214bebe31eaa4b813c59825391b",
     "confirmations": 4,
     "block": {
-        "number": 2134623434,
-        "hash": "0x1023401243..."
+        "number": 4316966,
+        "hash": "0xf80718e3021cc6c226a01ea69b98131cd9b03fa5a0cac1f2469cc32d0f09e110"
     },
     "inTransaction": {
-        "hash": "0x1023401243...",
+        "hash": "0x7e29e165d15ec1c6fc0b71eed944471308c10d0450fe7e768843241f944bdfde",
         "amount": 21000000000000
     }
 }
 ```
-
-<h4>Output:</h4>
-1 - If you want to stop callback calls - answer the number of the invoice id<br>
-2 - If you want to continue calling a callback, answer something other than the invoice id
-
 <h4>PHP example:</h4>
 
 ```php
