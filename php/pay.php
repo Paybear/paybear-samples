@@ -9,6 +9,6 @@ if ($response = file_get_contents($url)) {
     $response = json_decode($response);
     if (isset($response->data->address)) {
         echo $response->data->address;
-        //save $data->data->invoice and keep it secret
+        //save $response->data->invoice and keep it secret
     }
 }
