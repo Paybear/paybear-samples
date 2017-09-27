@@ -119,3 +119,6 @@ if ($data) {
 }
 ```
 
+<h3>Request Limit.</h3>
+The system is designed to process thousands of transactions per second, so we do not limit the number of payments you can process.
+However, for DDoS protection reasons, the API calls are limited to 1000 per minute from one IP.
