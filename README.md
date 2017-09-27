@@ -3,7 +3,7 @@
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
-            <td>https://api.paybear.io/v1/eth/payment/{payout_address=""}/{callback_url=urlencode("")}?fee_level={slow | normal | fast | flash}</td>
+            <td>https://api.paybear.io/v1/eth/payment/{payout_address=""}/{callback_url=urlencode("")}?fee_level= {slow | normal | fast | flash}</td>
         </tr>
     </tbody>
 </table>
@@ -53,7 +53,7 @@
 
 <h4>Curl example:</h4>
 
-```
+```curl
 rawurlencode() {
 local string="${1}"
 local strlen=${#string}
