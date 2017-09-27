@@ -8,7 +8,7 @@ def pay
 
   response = ActiveSupport::JSON.decode(open(url).read)
 
-  if response[:data][:address]
+  if response[:success]
     puts response[:data][:address]
     # save response[:data][:invoice] and keep it secret
   end
