@@ -1,3 +1,5 @@
+<h3>PayBear.io API</h3>
+This API allows to accept Ethereum payments. No signup required, authorization is not required. More details and pricing can be found on our website: https://www.paybear.io
 <h3>Create payment request</h3>
 <h4>Use GET query to create payment request:</h4>
 <table border="0" cellspacing="0" cellpadding="10" >
@@ -16,7 +18,7 @@
   </tr>
   <tr>
       <td>callback_url</td>
-      <td>Your server callback url (urlencoded) for process payment status</td>
+      <td>Your server callback url (urlencoded)</td>
   </tr>
 </tbody></table>
 <h4>Optional GET parameters:</h4>
@@ -87,7 +89,7 @@ A callback is sent every time a new block is mined. To stop further callbacks, r
     }
 }
 ```
-<h4>PHP example:</h4>
+<h4>PHP example:</h4> More examples: <a href="nodejs">Node.js</a>, <a href="rails">Ruby on Rails</a>
 
 ```php
 const CONFIRMATIONS = 3;
