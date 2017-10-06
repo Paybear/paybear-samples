@@ -111,11 +111,7 @@ if ($data) {
 }
 ```
 
-<h3>Request Limit.</h3>
-The system is designed to process thousands of transactions per second, so we do not limit the number of payments you can process.
-However, for DDoS protection reasons, the API calls are limited to 1000 per minute from one IP.
-
-<h3>Get Market Rate.</h3>
+<h3>Get Market Rate</h3>
 <h4>Use GET query to obtain the current average market rate:</h4>
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
@@ -150,7 +146,11 @@ $url = "https://api.paybear.io/v1/eth/exchange/usd/rate";
 if ($response = file_get_contents($url)) {
     $response = json_decode($response);
     if ($response->success) {
-        echo $response->data->mid];
+        echo $response->data->mid;
     }
 }
 ```
+
+<h3>Request Limit</h3>
+The system is designed to process thousands of transactions per second, so we do not limit the number of payments you can process.
+However, for DDoS protection reasons, the API calls are limited to 1000 per minute from one IP.
