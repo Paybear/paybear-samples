@@ -114,3 +114,43 @@ if ($data) {
 <h3>Request Limit.</h3>
 The system is designed to process thousands of transactions per second, so we do not limit the number of payments you can process.
 However, for DDoS protection reasons, the API calls are limited to 1000 per minute from one IP.
+
+<h3>Get Market Rate.</h3>
+<h4>Use GET query to obtain the current average market rate:</h4>
+<table border="0" cellspacing="0" cellpadding="10" >
+        <tbody><tr>
+            <td>GET</td>
+            <td><a href="https://api.paybear.io/v1/eth/exchange/usd/rate">https://api.paybear.io/v1/eth/exchange/usd/rate</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>Response:</h4>
+The API always with a JSON string containing the rates from several online exchanges, as well as the average rate. It is recommended to cache the rates for 10-15 minutes.
+
+<h4>Response example:</h4>
+
+```json
+{
+    "success": true,
+    "data": {
+        "poloniex": 301.71905,
+        "bittrex": 302.05,
+        "bitfinex": 301.53499,
+        "mid": 301.76807
+    }
+}
+```
+
+<h4>PHP example:</h4> More examples: <a href="nodejs">Node.js</a>, <a href="rails">Ruby on Rails</a>
+
+```php
+$url = "https://api.paybear.io/v1/eth/exchange/usd/rate";
+
+if ($response = file_get_contents($url)) {
+    $response = json_decode($response);
+    if ($response->success) {
+        echo $response->data->mid];
+    }
+}
+```
