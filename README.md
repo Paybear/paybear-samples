@@ -14,7 +14,7 @@ This API allows to accept Ethereum payments. No signup required, authorization i
   <tbody>
   <tr>
     <td>payout_address</td>
-    <td>Your address for payment</td>
+    <td>Your address for payment <a href="#where-can-i-get-my-payout-address">(?)</a></td>
   </tr>
   <tr>
       <td>callback_url</td>
@@ -154,3 +154,9 @@ if ($response = file_get_contents($url)) {
 <h3>Request Limit</h3>
 The system is designed to process thousands of transactions per second, so we do not limit the number of payments you can process.
 However, for DDoS protection reasons, the API calls are limited to 1000 per minute from one IP.
+
+### Where can I get my payout address?
+You will need payout addresses for all crypto currencies to get your payout money. Only you will have access to your payout wallets.
+You can use any online wallet you like or use a paper wallet https://en.bitcoin.it/wiki/Paper_wallet.
+If you don't know how to create one, we suggest using MyEtherWallet https://www.myetherwallet.com/ for Ethereum and BitAddress https://www.bitaddress.org/ for Bitcoin.
+There are many more available options and you can use any wallet of your choice.
