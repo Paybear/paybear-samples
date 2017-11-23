@@ -1,7 +1,7 @@
 var https = require('https');
 
-module.exports = function() {
-  var url = 'https://api.paybear.io/v1/eth/exchange/usd/rate';
+module.exports = function (curCode, callback) {
+  var url = 'https://api.paybear.io/v1/' + curCode.toLowerCase() + '/exchange/usd/rate';
 
   https.get(url, function (res) {
     var rawData = '';
@@ -10,11 +10,18 @@ module.exports = function() {
     res.on('end', function () {
       var response = JSON.parse(rawData);
       if (response.success) {
-        console.log(response.data.mid);
+        callback({
+          error: null,
+          rate: response.data.mid
+        });
       }
     });
   }).
   on('error', function (e) {
     console.error(e);
+    callback({
+      error: e,
+      rate: null
+    });
   });
 };
