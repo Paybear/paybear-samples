@@ -1,17 +1,21 @@
 <h3>PayBear.io API</h3>
-This API allows to accept Ethereum payments. No signup required, authorization is not required. More details and pricing can be found on our website: https://www.paybear.io
+This API allows to accept Ethereum, Bitcoin, Bitcoin Cash, Bitcoin Gold, Litecoin and Dash payments. No signup required, authorization is not required. More details and pricing can be found on our website: https://www.paybear.io
 <h3>Create payment request</h3>
 <h4>Use GET query to create payment request:</h4>
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
-            <td>https://api.paybear.io/v1/eth/payment/{payout_address}/{callback_url}</td>
+            <td>https://api.paybear.io/v1/{crpyto}/payment/{payout_address}/{callback_url}</td>
         </tr>
     </tbody>
 </table>
 <h4>Parameters:</h4>
 <table>
   <tbody>
+  <tr>
+      <td>crypto</td>
+      <td>Crpyto currency for exchange (eth, btc, bch, ltc, dash, btg)</a></td>
+    </tr>
   <tr>
     <td>payout_address</td>
     <td>Your address for payment <a href="#where-can-i-get-my-payout-address">(?)</a></td>
@@ -28,13 +32,13 @@ This API allows to accept Ethereum payments. No signup required, authorization i
     <td>Fee level, optional, default "Normal"</td>
   </tr>
 </table>
-<h4>Fee levels for Ethereum:</h4>
+<h4>Fee levels:</h4>
 <table>
-    <tr><td>Parameter</td><td><a href="http://ethgasstation.info/FAQpage.php">Gas price</a></td><td>Time</td></tr>
-    <tr><td>Slow</td><td>1 GWei</td><td>~10 min</td></tr>
-    <tr><td>Normal (default)</td><td>4 GWei</td><td>~3 min</td></tr>
-    <tr><td>Fast</td><td>20 GWei</td><td>~2 min</td></tr>
-    <tr><td>Flash</td><td>40 GWei</td><td>~1 min</td></tr>
+    <tr><td>Parameter</td><td>Ethereum <a href="http://ethgasstation.info/FAQpage.php">Gas price</a></td><td>Bitcoin</td></tr>
+    <tr><td>Slow</td><td>1 GWei (~10 min)</td><td>0.0000226 (~? min)</td></tr>
+    <tr><td>Normal (default) (~3 min)</td><td>4 GWei</td><td>0.000113 (~? min)</td></tr>
+    <tr><td>Fast (~2 min)</td><td>20 GWei</td><td></td>0.0002938 (~? min)</tr>
+    <tr><td>Flash (~1 min)</td><td>40 GWei</td><td>0.0004746 (~? min)</td></tr>
 </table>
 <h4>Example request URL:</h4>
 <a href="https://api.paybear.io/v1/eth/payment/0x39ee76948d238fad2b750998f8a38d80c73c7cd7/http%3A%2F%2Fputsreq.com%2FUv8u7ofxXDWVoaVawDWd/?fee_level=normal">
@@ -79,12 +83,14 @@ A callback is sent every time a new block is mined. To stop further callbacks, r
 {
     "invoice": "7e691214bebe31eaa4b813c59825391b",
     "confirmations": 4,
+    "blockchain": "eth",
     "block": {
-        "number": 4316966,
+        "number": 4316966,  
         "hash": "0xf80718e3021cc6c226a01ea69b98131cd9b03fa5a0cac1f2469cc32d0f09e110"
     },
     "inTransaction": {
         "hash": "0x7e29e165d15ec1c6fc0b71eed944471308c10d0450fe7e768843241f944bdfde",
+        "exp": 18,
         "amount": 21000000000000
     }
 }
