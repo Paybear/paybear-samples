@@ -112,14 +112,98 @@ if ($data) {
 ```
 
 <h3>Get Market Rate</h3>
+
+<h4>Use GET query to obtain all the current average market rates:</h4>
+<table border="0" cellspacing="0" cellpadding="10" >
+        <tbody><tr>
+            <td>GET</td>
+            <td><a href="https://api.paybear.io/v1/exchange/{fiat}/rate">https://api.paybear.io/v1/exchange/usd/rate</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>Parameters:</h4>
+<table>
+  <tbody>
+  <tr>
+      <td>fiat</td>
+      <td>Fiat currency for exchange</td>
+  </tr>
+</tbody></table>
+
+<h4>Response:</h4>
+The API always with a JSON string containing the rates from several online exchanges, as well as the average rate. It is recommended to cache the rates for 10-15 minutes.
+
+<h4>Response example:</h4>
+
+```json
+{
+    "success": true,
+    "data": {
+        "ltc": {
+            "poloniex": 340.986909455,
+            "hitbtc": 340.568,
+            "bittrex": 340.25,
+            "bitfinex": 341.295,
+            "mid": 340.77497736375
+        },
+        "eth": {
+            "poloniex": 804.580989955,
+            "hitbtc": 805.88,
+            "bittrex": 803.47641155,
+            "bitfinex": 805.125,
+            "mid": 804.76560037625
+        },
+        "dash": {
+            "poloniex": 1129.8512215,
+            "hitbtc": 1130.145,
+            "bittrex": 1134.1035001,
+            "mid": 1131.3665738666666
+        },
+        "btg": {
+            "hitbtc": 320.485,
+            "bittrex": 317.90500002,
+            "bitfinex": 320.46500003,
+            "mid": 319.61833334
+        },
+        "btc": {
+            "poloniex": 17348.94643245,
+            "hitbtc": 17322.91,
+            "bittrex": 17347.05,
+            "bitfinex": 17355.5,
+            "mid": 17343.6016081125
+        },
+        "bch": {
+            "poloniex": 2595.49999996,
+            "hitbtc": 2600.6334100004,
+            "bitfinex": 2591.55,
+            "mid": 2595.8944699866665
+        }
+    }
+}
+```
+
 <h4>Use GET query to obtain the current average market rate:</h4>
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
-            <td><a href="https://api.paybear.io/v1/eth/exchange/usd/rate">https://api.paybear.io/v1/eth/exchange/usd/rate</a></td>
+            <td><a href="https://api.paybear.io/v1/{crypto}/exchange/{fiat}/rate">https://api.paybear.io/v1/eth/exchange/usd/rate</a></td>
         </tr>
     </tbody>
 </table>
+
+<h4>Parameters:</h4>
+<table>
+  <tbody>
+  <tr>
+    <td>crypto</td>
+    <td>Crpyto currency for exchange (eth, btc, bch, ltc, dash, btg)</a></td>
+  </tr>
+  <tr>
+      <td>fiat</td>
+      <td>Fiat currency for exchange (usd, eur, cad and other)</td>
+  </tr>
+</tbody></table>
 
 <h4>Response:</h4>
 The API always with a JSON string containing the rates from several online exchanges, as well as the average rate. It is recommended to cache the rates for 10-15 minutes.
