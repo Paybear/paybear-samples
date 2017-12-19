@@ -117,7 +117,7 @@ if ($data) {
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
-            <td><a href="https://api.paybear.io/v1/exchange/{fiat}/rate">https://api.paybear.io/v1/exchange/usd/rate</a></td>
+            <td><a href="https://api.paybear.io/v1/exchange/usd/rate">https://api.paybear.io/v1/exchange/{fiat}/rate</a></td>
         </tr>
     </tbody>
 </table>
@@ -187,7 +187,7 @@ The API always with a JSON string containing the rates from several online excha
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
-            <td><a href="https://api.paybear.io/v1/{crypto}/exchange/{fiat}/rate">https://api.paybear.io/v1/eth/exchange/usd/rate</a></td>
+            <td><a href="https://api.paybear.io/v1/eth/exchange/usd/rate">https://api.paybear.io/v1/{crypto}/exchange/{fiat}/rate</a></td>
         </tr>
     </tbody>
 </table>
