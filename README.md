@@ -135,7 +135,7 @@ if ($data) {
   <tbody>
   <tr>
       <td>fiat</td>
-      <td>Fiat currency for exchange</td>
+      <td>Fiat currency for exchange (usd, eur, cad and other)</td>
   </tr>
 </tbody></table>
 
