@@ -37,7 +37,7 @@ This API allows to accept Ethereum, Bitcoin, Bitcoin Cash, Bitcoin Gold, Litecoi
     <tr><td>Parameter</td><td>Ethereum <a href="http://ethgasstation.info/FAQpage.php">Gas price</a></td><td>Bitcoin</td></tr>
     <tr><td>Slow</td><td>1 GWei (~10 min)</td><td>0.0000226 (~? min)</td></tr>
     <tr><td>Normal (default)</td><td>4 GWei (~3 min)</td><td>0.000113 (~? min)</td></tr>
-    <tr><td>Fast</td><td>20 GWei (~2 min)</td><td></td>0.0002938 (~? min)</tr>
+    <tr><td>Fast</td><td>20 GWei (~2 min)</td><td>0.0002938 (~? min)</td></tr>
     <tr><td>Flash</td><td>40 GWei (~1 min)</td><td>0.0004746 (~? min)</td></tr>
 </table>
 <h4>Example request URL:</h4>
