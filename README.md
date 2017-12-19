@@ -37,10 +37,10 @@ This API allows to accept Ethereum, Bitcoin, Bitcoin Cash, Bitcoin Gold, Litecoi
     <tr><td>Blockchain</td><td>Slow</td><td>Normal (default)</td><td>Fast</td><td>Flash</td></tr>
     <tr><td>Ethereum <a href="http://ethgasstation.info/FAQpage.php">Gas price</a></td><td>1 GWei (~10 min)</td><td>4 GWei (~3 min)</td><td>20 GWei (~2 min)</td><td>40 GWei (~1 min)</td></tr>
     <tr><td>Bitcoin</td><td>0.0000226 (~? min)</td><td>0.000113 (~? min)</td><td>0.0002938 (~? min)</td><td>0.0004746 (~? min)</td></tr>
-    <tr><td>Bitcoin Cash</td><td>0.0000226 (~? min)</td><td>0.000113 (~? min)</td><td>0.0002938 (~? min)</td><td>0.0004746 (~? min)</td></tr>
-    <tr><td>Litecoin</td><td>0.0000226 (~? min)</td><td>0.000113 (~? min)</td><td>0.0002938 (~? min)</td><td>0.0004746 (~? min)</td></tr>
-    <tr><td>Dash</td><td>0.0000226 (~? min)</td><td>0.000113 (~? min)</td><td>0.0002938 (~? min)</td><td>0.0004746 (~? min)</td></tr>
-    <tr><td>Bicoin Gold</td><td>0.0000226 (~? min)</td><td>0.000113 (~? min)</td><td>0.0002938 (~? min)</td><td>0.0004746 (~? min)</td></tr>
+    <tr><td>Bitcoin Cash</td><td>0.0000226 (~? min)</td><td>0.0000452 (~? min)</td><td>0.000904 (~? min)</td><td>0.0001356 (~? min)</td></tr>
+    <tr><td>Bicoin Gold</td><td>0.0000226 (~? min)</td><td>0.0000452 (~? min)</td><td>0.000904 (~? min)</td><td>0.0001356 (~? min)</td></tr>
+    <tr><td>Litecoin</td><td>0.00199784 (~? min)</td><td>0.00299676 (~? min)</td><td>0.00399568 (~? min)</td><td>0.0049946 (~? min)</td></tr>
+    <tr><td>Dash</td><td>0 (~? min)</td><td>0.00009944 (~? min)</td><td>0.00014916 (~? min)</td><td>0.00019888 (~? min)</td></tr>
 </table>
 <h4>Example request URL:</h4>
 <a href="https://api.paybear.io/v1/eth/payment/0x39ee76948d238fad2b750998f8a38d80c73c7cd7/http%3A%2F%2Fputsreq.com%2FUv8u7ofxXDWVoaVawDWd/?fee_level=normal">
