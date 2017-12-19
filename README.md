@@ -20,17 +20,17 @@ This API allows to accept Ethereum, Bitcoin, Bitcoin Cash, Bitcoin Gold, Litecoi
     <td>payout_address</td>
     <td>Your address for payment <a href="#where-can-i-get-my-payout-address">(?)</a></td>
   </tr>
-  <tr>
-      <td>callback_url</td>
-      <td>Your server callback url (urlencoded)</td>
-  </tr>
 </tbody></table>
-<h4>Optional GET parameters:</h4>
+<h4>Optional parameters:</h4>
 <table>
   <tr>
-    <td>fee_level</td>
+    <td>fee_level (GET parameter)</td>
     <td>Fee level, optional, default "Normal"</td>
   </tr>
+  <tr>
+        <td>callback_url</td>
+        <td>Your server callback url (urlencoded)</td>
+    </tr>
 </table>
 <h4>Fee levels:</h4>
 <table>
