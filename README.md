@@ -1,5 +1,5 @@
 <h3>PayBear.io API</h3>
-This API allows to accept Ethereum, Bitcoin, Bitcoin Cash, Bitcoin Gold, Litecoin and Dash payments. No signup required, authorization is not required. More details and pricing can be found on our website: https://www.paybear.io
+This API allows to accept `Ethereum`, `Bitcoin`, `Bitcoin Cash`, `Bitcoin Gold`, `Litecoin` and `Dash` payments. More details and pricing can be found on our website: https://www.paybear.io
 <h3>Create payment request</h3>
 <h4>Use GET query to create payment request:</h4>
 <table border="0" cellspacing="0" cellpadding="10" >
@@ -14,11 +14,11 @@ This API allows to accept Ethereum, Bitcoin, Bitcoin Cash, Bitcoin Gold, Litecoi
   <tbody>
   <tr>
       <td>crypto</td>
-      <td>Crpyto currency for exchange (eth, btc, bch, ltc, dash, btg)</a></td>
+      <td>Crpyto currency to accept (`eth`, `btc`, `bch`, `ltc`, `dash`, `btg`)</a></td>
     </tr>
   <tr>
     <td>payout_address</td>
-    <td>Your address for payment <a href="#where-can-i-get-my-payout-address">(?)</a></td>
+    <td>Your address for payout <a href="#where-can-i-get-my-payout-address">(?)</a></td>
   </tr>
 </tbody></table>
 <h4>Optional parameters:</h4>
@@ -35,13 +35,15 @@ This API allows to accept Ethereum, Bitcoin, Bitcoin Cash, Bitcoin Gold, Litecoi
 <h4>Fee levels:</h4>
 <table>
     <tr><td>Blockchain</td><td>Slow</td><td>Normal (default)</td><td>Fast</td><td>Flash</td></tr>
-    <tr><td>Ethereum <a href="http://ethgasstation.info/FAQpage.php">Gas price</a></td><td>1 GWei (~10 min)</td><td>4 GWei (~3 min)</td><td>20 GWei (~2 min)</td><td>40 GWei (~1 min)</td></tr>
-    <tr><td>Bitcoin</td><td>0.0000226 (~? min)</td><td>0.000113 (~? min)</td><td>0.0002938 (~? min)</td><td>0.0004746 (~? min)</td></tr>
-    <tr><td>Bitcoin Cash</td><td>0.0000226 (~? min)</td><td>0.0000452 (~? min)</td><td>0.000904 (~? min)</td><td>0.0001356 (~? min)</td></tr>
-    <tr><td>Bicoin Gold</td><td>0.0000226 (~? min)</td><td>0.0000452 (~? min)</td><td>0.000904 (~? min)</td><td>0.0001356 (~? min)</td></tr>
-    <tr><td>Litecoin</td><td>0.00199784 (~? min)</td><td>0.00299676 (~? min)</td><td>0.00399568 (~? min)</td><td>0.0049946 (~? min)</td></tr>
-    <tr><td>Dash</td><td>0 (~? min)</td><td>0.00009944 (~? min)</td><td>0.00014916 (~? min)</td><td>0.00019888 (~? min)</td></tr>
+    <tr><td>Ethereum <a href="http://ethgasstation.info/FAQpage.php">Gas price</a></td><td>1 GWei</td><td>4 GWei</td><td>20 GWei</td><td>40 GWei</td></tr>
+    <tr><td>Bitcoin</td><td>0.0000226 BTC</td><td>0.000113 BTC</td><td>0.0002938 BTC</td><td>0.0004746 BTC</td></tr>
+    <tr><td>Bitcoin Cash</td><td>0.0000226 BCH</td><td>0.0000452 BCH</td><td>0.000904 BCH</td><td>0.0001356 BCH</td></tr>
+    <tr><td>Bicoin Gold</td><td>0.0000226 BTG</td><td>0.0000452 BTG</td><td>0.000904 BTG</td><td>0.0001356 BTG</td></tr>
+    <tr><td>Litecoin</td><td>0.00199784 LTC</td><td>0.00299676 LTC</td><td>0.00399568 LTC</td><td>0.0049946 LTC</td></tr>
+    <tr><td>Dash</td><td>FREE</td><td>0.00009944 DASH</td><td>0.00014916 DASH</td><td>0.00019888 DASH</td></tr>
 </table>
+Detailed information and approximate confirmation times can be found in our <a href="https://www.paybear.io/pricing">Pricing</a> page.
+
 <h4>Example request URL:</h4>
 <a href="https://api.paybear.io/v1/eth/payment/0x39ee76948d238fad2b750998f8a38d80c73c7cd7/http%3A%2F%2Fputsreq.com%2FUv8u7ofxXDWVoaVawDWd/?fee_level=normal">
 https://api.paybear.io/v1/eth/payment/0x39ee76948d238fad2b750998f8a38d80c73c7cd7/http%3A%2F%2Fputsreq.com%2FUv8u7ofxXDWVoaVawDWd/?fee_level=normal</a>
