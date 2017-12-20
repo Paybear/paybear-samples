@@ -90,6 +90,8 @@ You can find the complete list of settings below:
 	<tr><td>fiatSign</td><td>short abbreviation/sign of your currency (default=$)</td><td>"\$"</td></tr>
 	<tr><td>modal</td><td>set to true to display in a modal window, false to display inline (default=true)</td><td>true</td></tr>
 	<tr><td>enablePoweredBy</td><td>display "Powered by PayBear" in the header</td><td>false</td></tr>
+	<tr><td>enableBack</td><td>Enable back button (always true in `modal` mode)</td><td>false</td></tr>
+	<tr><td>onBackClick</td><td>Back button URL (or callback function)</td><td>"payment_failed.php?order=123"</td></tr>
 	<tr><td>statusUrl</td><td>the status of the payment will be checked every several seconds by downloading this URL. The reply format is described below</td><td>/status.php?order=123</td></tr>
 	<tr><td>settingsUrl</td><td>URL to get form settings from</td><td>/settings.php?order=123</td></tr>
 	<tr><td>redirectTo</td><td>after the payment is complete, the customer will be redirected to this URL</td><td>/success.php?order=123</td></tr>
