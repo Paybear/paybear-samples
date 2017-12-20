@@ -67,7 +67,7 @@
         appContainer.style.display = 'none';
 
         if (state.html) {
-            if (that.options.modal) {
+            if (that.options.modal && that.modal.parentNode) {
                 document.body.appendChild(that.root);
                 that.modal.parentNode.removeChild(that.modal);
             }
@@ -648,7 +648,7 @@
         document.querySelector('.P-Payment__header__check').style.display = 'block';
 
         if (options.redirectTo && options.redirectTimeout) {
-            paymentConfirmed.querySelector('p').textContent = 'Redirecting you back in ' + options.redirectTimeout / 1000 + ' seconds.';
+            paymentConfirmed.querySelector('p').textContent = 'Redirecting you back in ' + options.redirectTimeout + ' seconds.';
             paymentConfirmed.querySelector('.P-btn').setAttribute('href', options.redirectTo);
             if (options.enableBack) {
                 that.topBackButton.removeEventListener('click', that.handleTopBackButton);
@@ -678,7 +678,7 @@
                 if (redirect.indexOf(window.location.href) > -1) {
                     window.location.reload();
                 }
-            }, options.redirectTimeout);
+            }, options.redirectTimeout * 1000);
         }
 
     }
