@@ -1,5 +1,5 @@
 <h3>PayBear.io API</h3>
-This API allows to accept `Ethereum`, `Bitcoin`, `Bitcoin Cash`, `Bitcoin Gold`, `Litecoin` and `Dash` payments. More details and pricing can be found on our website: https://www.paybear.io
+This API allows to accept <b>Ethereum</b>, <b>Bitcoin</b>, <b>Bitcoin Cash</b>, <b>Bitcoin Gold</b>, <b>Litecoin</b> and <b>Dash</b> payments. More details and pricing can be found on our website: https://www.paybear.io
 <h3>Create payment request</h3>
 <h4>Use GET query to create payment request:</h4>
 <table border="0" cellspacing="0" cellpadding="10" >
@@ -14,11 +14,11 @@ This API allows to accept `Ethereum`, `Bitcoin`, `Bitcoin Cash`, `Bitcoin Gold`,
   <tbody>
   <tr>
       <td>crypto</td>
-      <td>Crpyto currency to accept (`eth`, `btc`, `bch`, `ltc`, `dash`, `btg`)</a></td>
+      <td>Crpyto currency to accept (eth, btc, bch, ltc, dash, btg)</a></td>
     </tr>
   <tr>
     <td>payout_address</td>
-    <td>Your address for payout <a href="#where-can-i-get-my-payout-address">(?)</a></td>
+    <td>Your address for payouts <a href="#where-can-i-get-my-payout-address">(?)</a></td>
   </tr>
 </tbody></table>
 <h4>Optional parameters:</h4>
@@ -80,7 +80,7 @@ if ($response = file_get_contents($url)) {
 ```
 
 <h3>Callback</h3>
-A callback is sent every time a new block is mined. To stop further callbacks, reply with the invoice ID. See example below.
+A callback is sent every time a new block is mined. To stop further callbacks, reply with the invoice ID. See code sample below.
 <h4>Callback example:</h4>
 
 ```json
@@ -123,7 +123,7 @@ if ($data) {
 
 <h3>Get Market Rate</h3>
 
-<h4>Use GET query to obtain all the current average market rates:</h4>
+<h4>Use GET query to obtain the current average market rates:</h4>
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
@@ -137,12 +137,12 @@ if ($data) {
   <tbody>
   <tr>
       <td>fiat</td>
-      <td>Fiat currency for exchange (usd, eur, cad and other)</td>
+      <td>Fiat currency (usd, eur, cad, rub etc)</td>
   </tr>
 </tbody></table>
 
 <h4>Response:</h4>
-The API always with a JSON string containing the rates from several online exchanges, as well as the average rate. It is recommended to cache the rates for 10-15 minutes.
+The API returns a JSON string containing the rates from several online exchanges, as well as the average rate. It is recommended to cache the rates for 10-15 minutes.
 
 <h4>Response example:</h4>
 
@@ -193,7 +193,7 @@ The API always with a JSON string containing the rates from several online excha
 }
 ```
 
-<h4>Use GET query to obtain the current average market rate:</h4>
+<h4>Exchange rates for one currency:</h4>
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
@@ -207,16 +207,16 @@ The API always with a JSON string containing the rates from several online excha
   <tbody>
   <tr>
     <td>crypto</td>
-    <td>Crpyto currency for exchange (eth, btc, bch, ltc, dash, btg)</a></td>
+    <td>Crpyto currency (eth, btc, bch, ltc, dash, btg)</a></td>
   </tr>
   <tr>
       <td>fiat</td>
-      <td>Fiat currency for exchange (usd, eur, cad and other)</td>
+      <td>Fiat currency (usd, eur, cad, rub etc)</td>
   </tr>
 </tbody></table>
 
 <h4>Response:</h4>
-The API always with a JSON string containing the rates from several online exchanges, as well as the average rate. It is recommended to cache the rates for 10-15 minutes.
+The API returns a JSON string containing the rates from several online exchanges, as well as the average rate. It is recommended to cache the rates for 10-15 minutes.
 
 <h4>Response example:</h4>
 

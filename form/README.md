@@ -14,7 +14,7 @@ If you need to translate the form to a different language or change some text, y
 ```
 <button id="paybear-bitcoin">Pay With Bitcoin</button>
 ```
-You can style the button to match your website. If you need to support several currencies, you can add multiple buttons:
+You can style the button to match your design. If you need to support several currencies, you can add multiple buttons:
 ```
 <button id="paybear-ethereum">Pay with Ethereum</button>
 ```
@@ -23,6 +23,24 @@ Alternatively you can create a single button for all crypto currencies and enabl
 <button id="paybear-all">Pay with Crypto</button>
 ```
 4. Add a piece of code binding your button(s) to the form.
+
+Single currency example:
+
+```
+<script>
+    (function () {
+        window.paybear = new Paybear({
+            button: '#paybear-ethereum',
+            fiatValue: 19.95,
+            statusUrl: "status.php?order=123",
+            redirectTo: "success.php?order=123",
+            currencies: "currencies.php?order=123&token=eth",
+        });
+    })();
+</script>
+```
+
+Multiple currencies example:
 ```
 <script>
     (function () {
@@ -37,7 +55,9 @@ Alternatively you can create a single button for all crypto currencies and enabl
     })();
 </script>
 ```
+
 If you don't want a modal window, you can change the `modal` parameter to false.
+
 If you want the form to appear immediately, without any buttons, the `button` parameter can be removed.
 
 5. Set up your backend as described in [one of the examples](https://github.com/Paybear/paybear-samples)
@@ -57,12 +77,12 @@ You can make the form download the settings via AJAX by passing the link to `set
 
 Similarly, `currencies` can be either the URL or the array of currencies.
 
-You can find the complete list of settings below:
 
+You can find the complete list of settings below:
 
 <table>
 	<tr><th>Key</th><th>Description</th><th>Example</th></tr>
-	<tr><td>currencies</td><td>array of currencies to use or URL of the page to download it from. Detailed description below</td><td>["ETH"] => TODO</td></tr>
+	<tr><td>currencies</td><td>array of currencies to use or URL of the page to download it from. Detailed description below</td><td>["ETH"] => {`see structure below`}</td></tr>
 	<tr><td>button</td><td>DOM selector of the button to use as a form trigger. If set to null, the form is shown immediately on page load</td><td>null </td></tr>
 	<tr><td>fiatValue</td><td>your order total</td><td>"19.99"</td></tr>
 	<tr><td>enableFiatTotal</td><td>show fiat (USD) total at the top of the form</td><td>true</td></tr>
@@ -111,7 +131,7 @@ Example (single currency form):
                     "title":"Litecoin",
                     "code":"LTC",
                     "icon":"images/ltc.svg",
-                    "blockExplorer":"https:\/\/live.blockcypher.com\/ltc\/address\/%s\/",
+                    "blockExplorer":"https://live.blockcypher.com/ltc/address/%s/",
                     "walletLink":"litecoin:%s?amount=%s",
                     "address":"LWUx4FKFXmw1K12GRyZj9RavdBz6jNQNqX",
                     "coinsValue":0.058516,
@@ -138,7 +158,7 @@ Example (multi currency form):
                     "title":"Bitcoin Cash",
                     "code":"BCH",
                     "icon":"images/bch.svg",
-                    "blockExplorer":"https:\/\/blockchair.com\/bitcoin-cash\/address\/%s",
+                    "blockExplorer":"https://blockdozer.com/insight/address/%s",
                     "currencyUrl":"currency.php?order=123&token=BCH",
                     "coinsValue":0.008797,
                     "rate":2272.2751
@@ -147,7 +167,7 @@ Example (multi currency form):
                     "title":"Bitcoin Gold",
                     "code":"BTG",
                     "icon":"images/btg.svg",
-                    "blockExplorer":"https:\/\/btgexp.com\/address\/%s",
+                    "blockExplorer":"https://btgexp.com/address/%s",
                     "currencyUrl":"currency.php?order=123&token=BTG",
                     "coinsValue":0.066913,
                     "rate":298.745
