@@ -1,13 +1,13 @@
 # How to Integrate a Crypto Payment Form?
 
-1. First include CSS and JS files. Insert the following code before `</head>` or immediately after `<body>`.
+1. Include CSS and JS files. Insert the following code before `</head>` or immediately after `<body>`.
 
 ```
 <script src="paybear.js"></script>
 <link rel="stylesheet" href="paybear.css" />
 ```
 
-2. There are two ways to place a form within a page: inline form and modal window. Depending on what you choose paste the contents of inline.html or modal.html to the place where your form should appear.
+2. Paste the contents of `paybear.html` to the place where your form should appear.
 If you need to translate the form to a different language or change some text, you can manipulate the HTML code directly.
 
 3. Immediately after that insert a button to invoke the form:
@@ -22,66 +22,139 @@ Alternatively you can create a single button for all crypto currencies and enabl
 ```
 <button id="paybear-all">Pay with Crypto</button>
 ```
-4. Add a piece of code binding your button to the form. If using a modal:
+4. Add a piece of code binding your button(s) to the form.
 ```
 <script>
     (function () {
-        var button = document.querySelector('#paybear-bitcoin');
-        var modal = document.querySelector('#paybear-modal');
-        var url = 'https://YOURDOMAIN.com/payment/new/10';
-
-        paybearForm(button, url, modal);
+        window.paybear = new Paybear({
+            button: '#paybear-all',
+            fiatValue: 19.95,
+            currencies: "currencies.php?order=123",
+            statusUrl: "status.php?order=123",
+            redirectTo: "success.php?order=123",
+            modal: true
+        });
     })();
 </script>
 ```
-If using inline form:
-```
-<script>
-    (function () {
-        var button = document.querySelector('#paybear-bitcoin');
-        var url = 'https://YOURDOMAIN.com/payment/new/10';
+If you don't want a modal window, you can change the `modal` parameter to false.
+If you want the form to appear immediately, without any buttons, the `button` parameter can be removed.
 
-        paybearForm(button, url);
-    })();
-</script>
-```
 5. Set up your backend as described in [one of the examples](https://github.com/Paybear/paybear-samples)
-
-The form accepts the following settings (in JSON format):
-```
-{  
-   "currencies":[  
-      {  
-         "coinsValue":0.9143,
-         "rate":364.18,
-         "title":"Ethereum",
-         "code":"ETH",
-         "metamask":true,
-         "icon":"data:image\/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQxNyIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiIHZpZXdCb3g9IjAgMCAyNTYgNDE3IiB3aWR0aD0iMjU2IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0xMjcuOTYxMSAwLTIuNzk1IDkuNXYyNzUuNjY4bDIuNzk1IDIuNzkgMTI3Ljk2Mi03NS42Mzh6IiBmaWxsPSIjMzQzNDM0Ii8+PHBhdGggZD0ibTEyNy45NjIgMC0xMjcuOTYyIDIxMi4zMiAxMjcuOTYyIDc1LjYzOXYtMTMzLjgwMXoiIGZpbGw9IiM4YzhjOGMiLz48cGF0aCBkPSJtMTI3Ljk2MTEgMzEyLjE4NjYtMS41NzUgMS45MnY5OC4xOTlsMS41NzUgNC42MDEgMTI4LjAzOC0xODAuMzJ6IiBmaWxsPSIjM2MzYzNiIi8+PHBhdGggZD0ibTEyNy45NjIgNDE2LjkwNTJ2LTEwNC43MmwtMTI3Ljk2Mi03NS42eiIgZmlsbD0iIzhjOGM4YyIvPjxwYXRoIGQ9Im0xMjcuOTYxMSAyODcuOTU3NyAxMjcuOTYtNzUuNjM3LTEyNy45Ni01OC4xNjJ6IiBmaWxsPSIjMTQxNDE0Ii8+PHBhdGggZD0ibSAuMDAwOSAyMTIuMzIwOCAxMjcuOTYgNzUuNjM3di0xMzMuNzk5eiIgZmlsbD0iIzM5MzkzOSIvPjwvc3ZnPg==",
-         "blockExplorer":"https:\/\/etherscan.io\/address\/0x39EE76948d238Fad2b750998F8A38d80c73c7Cd7",
-         "walletLink":"ethereum:0x39EE76948d238Fad2b750998F8A38d80c73c7Cd7?amount=0.9143",
-         "address":"0x39EE76948d238Fad2b750998F8A38d80c73c7Cd7"
-      }
-   ],
-   "invoice":1111,
-   "fiatValue":333,
-   "statusUrl":"http:\/\/yourdomain.com\/status.php?order=1111"
-}
-```
-Add more elements to `currencies` array to support multiple currencies in the same form.
 
 
 # Advanced usage
-You can create the form instance yourself (without using a button) by passing the array of settings to the constructor directly:
+
+You can make the form download the settings via AJAX by passing the link to `settingsUrl` parameter.
 
 ```
 <script>
     (function () {
-        var settings = {....};
-	window.paybear = new Paybear(settings);
+		window.paybear = new Paybear({settingsUrl: "settings.php?order=123"});
     })();
 </script>
 ```
+
+Similarly, `currencies` can be either the URL or the array of currencies.
+
+You can find the complete list of settings below:
+
+| Key | Description | Example
+| ------ | ------ |
+| currencies | array of currencies to use or URL of the page to download it from. Detailed description below | ["ETH"] => TODO
+| button | DOM selector of the button to use as a form trigger. If set to null, the form is shown immediately on page load | null 
+| fiatValue | your order total | "19.99"
+| enableFiatTotal | show fiat (USD) total at the top of the form | true
+| fiatCurrency | currency code you use (default=USD) | "USD"
+| fiatSign | short abbreviation/sign of your currency (default=$) | "\$"
+| modal | set to true to display in a modal window, false to display inline (default=true) | true
+| enablePoweredBy | display "Powered by PayBear" in the header | false
+| statusUrl | the status of the payment will be checked every several seconds by downloading this URL. The reply format is described below | /status.php?order=123
+| settingsUrl | URL to get form settings from | /settings.php?order=123
+| redirectTo | after the payment is complete, the customer will be redirected to this URL | /success.php?order=123
+| redirectTimeout | number of seconds before redirecting the customer automatically. 0 disables the redirect. Default is 5 | 5
+| timer | time (in seconds) for the payment window. 0 disables the timer. Default value is 15 minutes | 15*60
+
+Structure of `currencies` array
+
+| Key | Description | Example
+| ------ | ------ |
+| title | Currency name | Ethereum
+| code | Short name / code | ETH
+| icon | Logo (link or data:image) | images/eth.png
+| metamask | Set to true to allow Metamask payments (only for ETH) | false
+| blockExplorer | `format`-compatible string to generate the link to block explorer. Parameter used: wallet address | "https://etherscan.io/address/%s"
+| walletLink | Link to wallet/APP. Set to `null` to disable wallet links. Parameters used: wallet address and amount to send | "ethereum:%s?amount=%s"
+| currencyUrl | For multi-currency forms allows to get address by making an AJAX call to this URL when the currency is selected | "currency.php?order=123&token=ETH
+| coinsValue | Amount to charge (in crypto) | 0.001
+| rate | Conversion rate (USD/Crypto) | 739.35
+| confirmations | Wait for this number of confirmations from the blockchain. This number should match the number in backend | 1
+| address | Wallet address to send money to (generated by PayBear API call). For multi currency forms use `currencyUrl` instead | "0x39ee76948d238fad2b750998f8a38d80c73c7cd7"
+
+
+Example (single currency form):
+
+```
+<script>
+    (function () {
+        window.paybear = new Paybear({
+            button: '#paybear-ltc',
+            fiatValue: 19.95,
+            statusUrl: "status.php?order=123",
+            redirectTo: "success.php?order=123",
+            currencies: [
+                    {
+                    "title":"Litecoin",
+                    "code":"LTC",
+                    "icon":"images/ltc.svg",
+                    "blockExplorer":"https:\/\/live.blockcypher.com\/ltc\/address\/%s\/",
+                    "walletLink":"litecoin:%s?amount=%s",
+                    "address":"LWUx4FKFXmw1K12GRyZj9RavdBz6jNQNqX",
+                    "coinsValue":0.058516,
+                    "rate":341.6141
+                    }
+                ]
+        });
+    })();
+</script>
+```
+
+Example (multi currency form):
+
+```
+<script>
+    (function () {
+        window.paybear = new Paybear({
+            button: '#paybear-all',
+            fiatValue: 19.95,
+            statusUrl: "status.php?order=123",
+            redirectTo: "success.php?order=123",
+            currencies: [
+                    {
+                    "title":"Bitcoin Cash",
+                    "code":"BCH",
+                    "icon":"images/bch.svg",
+                    "blockExplorer":"https:\/\/blockchair.com\/bitcoin-cash\/address\/%s",
+                    "currencyUrl":"currency.php?order=123&token=BCH",
+                    "coinsValue":0.008797,
+                    "rate":2272.2751
+                    },
+                    {
+                    "title":"Bitcoin Gold",
+                    "code":"BTG",
+                    "icon":"images/btg.svg",
+                    "blockExplorer":"https:\/\/btgexp.com\/address\/%s",
+                    "currencyUrl":"currency.php?order=123&token=BTG",
+                    "coinsValue":0.066913,
+                    "rate":298.745
+                    }
+                ]
+        });
+    })();
+</script>
+```
+
+
 
 # Code contributions
 - Have a suggestion or found a bug? Please [email us](mailto:contact@paybear.io) or [ping our Telegram](https://t.me/paybear)
