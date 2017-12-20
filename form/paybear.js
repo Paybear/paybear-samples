@@ -67,7 +67,7 @@
         appContainer.style.display = 'none';
 
         if (state.html) {
-            if (that.options.modal) {
+            if (that.options.modal && that.modal.parentNode) {
                 document.body.appendChild(that.root);
                 that.modal.parentNode.removeChild(that.modal);
             }
