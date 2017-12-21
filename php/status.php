@@ -4,10 +4,12 @@ const MIN_CONFIRMATIONS = 3;
 
 $orderId = (int)$_GET['order'];
 
+$confirmations = null;
+
 $confirmations = 0; //get from DB, see callback.php
 
 $data = array();
-if ($confirmations > 3) { //set max confirmations
+if ($confirmations >= 3) { //set max confirmations
 	$data['success'] = true;
 } else {
 	$data['success'] = false;

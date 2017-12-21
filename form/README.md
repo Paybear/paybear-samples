@@ -82,7 +82,7 @@ You can find the complete list of settings below:
 
 <table>
 	<tr><th>Key</th><th>Description</th><th>Example</th></tr>
-	<tr><td>currencies</td><td>array of currencies to use or URL of the page to download it from. Detailed description below</td><td>["ETH"] => {`see structure below`}</td></tr>
+	<tr><td>currencies</td><td>array of currencies to use or URL of the page to download it from. Detailed description below</td><td>[{`see structure below`}]</td></tr>
 	<tr><td>button</td><td>DOM selector of the button to use as a form trigger. If set to null, the form is shown immediately on page load</td><td>null </td></tr>
 	<tr><td>fiatValue</td><td>your order total</td><td>"19.99"</td></tr>
 	<tr><td>enableFiatTotal</td><td>show fiat (USD) total at the top of the form</td><td>true</td></tr>
@@ -108,6 +108,7 @@ Structure of `currencies` array
 	<tr><td>code</td><td>Short name / code</td><td>ETH</td></tr>
 	<tr><td>icon</td><td>Logo (link or data:image)</td><td>images/eth.png</td></tr>
 	<tr><td>metamask</td><td>Set to true to allow Metamask payments (only for ETH)</td><td>false</td></tr>
+	<tr><td>metamaskAuto</td><td>Show Metamask payment automatically (only if metamask is enabled)</td><td>true</td></tr>
 	<tr><td>blockExplorer</td><td>`format`-compatible string to generate the link to block explorer. Parameter used: wallet address</td><td>"https://etherscan.io/address/%s"</td></tr>
 	<tr><td>walletLink</td><td>Link to wallet/APP. Set to `null` to disable wallet links. Parameters used: wallet address and amount to send</td><td>"ethereum:%s?amount=%s"</td></tr>
 	<tr><td>currencyUrl</td><td>For multi-currency forms allows to get address by making an AJAX call to this URL when the currency is selected</td><td>"currency.php?order=123&token=ETH</td></tr>

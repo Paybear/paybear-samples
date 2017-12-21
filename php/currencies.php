@@ -13,7 +13,8 @@ if (isset($_GET['token'])) {
 } else {
 	$data = array();
 	foreach(array('ETH', 'BTC', 'LTC', 'BCH', 'BTG', 'DASH') as $token) {
-		$data[$token] = getCurrency($token, $orderId);
+		$currency = getCurrency($token, $orderId);
+		if ($currency) $data[] = $currency;
 	}
 }
 

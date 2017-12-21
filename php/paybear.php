@@ -9,7 +9,7 @@ function getAddress($orderId, $token = 'ETH') {
 	if ($response = file_get_contents($url)) {
 		$response = json_decode($response);
 		if (isset($response->data->address)) {
-			$response->data->address;
+			return $response->data->address;
 		}
 	}
 
@@ -122,7 +122,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 		if ($getAddress) {
 			$currency->address = getAddress( $orderId, $token );
 		} else {
-			$currency->currencyUrl = sprintf('currencies.php?orderId=%s&token=%s', $orderId, $token);
+			$currency->currencyUrl = sprintf('currencies.php?order=%s&token=%s', $orderId, $token);
 		}
 
 		return $currency;
