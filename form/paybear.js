@@ -437,7 +437,7 @@
                     }
                 });
             });
-            if (selectedCoin.metamaskAuto) {
+            if (selectedCoin.metamaskAuto !== false) {
                 walletBtn.click();
             }
         } else if (selectedCoin.walletLink) {
@@ -445,7 +445,6 @@
         } else {
             walletBtn.style.display = 'none';
         }
-
 
         paybearResizeFont(selectedCoin.address);
         window.addEventListener('resize', this.resizeListener, true);
