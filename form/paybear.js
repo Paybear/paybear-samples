@@ -437,6 +437,9 @@
                     }
                 });
             });
+            if (selectedCoin.metamaskAuto) {
+                walletBtn.click();
+            }
         } else if (selectedCoin.walletLink) {
             walletBtn.setAttribute('href', selectedCoin.walletLink);
         } else {
