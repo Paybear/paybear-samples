@@ -17,11 +17,10 @@ app.get('/paybear/currencies', (req, res) => {
     ['ETH', 'BTC', 'LTC', 'BCH', 'BTG', 'DASH'].forEach(function(token) {
       getCurrency(token, orderId, true, function(curr) {
         currs.push(curr);
-        console.log(currs)
       });
     });
     var i = setInterval(function() {
-      if(currs.length === 6) {
+      if (currs.length >= 6) {
         clearInterval(i);
         res.json(currs); //return this data to PayBear form
       }

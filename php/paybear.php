@@ -41,7 +41,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 			case 'ETH':
 				$currency = (object)[
 					'coinsValue'    => $coinsValue,
-					'rate'          => getRate('eth'),
+					'rate'          => $rate,
 					'title'         => "Ethereum",
 					'code'          => "ETH",
 					'metamask'      => true,
@@ -54,7 +54,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 			case 'BTC':
 				$currency = (object)[
 					'coinsValue'    => $coinsValue,
-					'rate'          => getRate('btc'),
+					'rate'          => $rate,
 					'title'         => 'Bitcoin',
 					'code'          => 'BTC',
 					'confirmations' => 1,
@@ -65,7 +65,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 			case 'LTC':
 				$currency = (object)[
 					'coinsValue'    => $coinsValue,
-					'rate'          => getRate('ltc'),
+					'rate'          => $rate,
 					'title'         => 'Litecoin',
 					'code'          => 'LTC',
 					'confirmations' => 1,
@@ -77,7 +77,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 			case 'BCH':
 				$currency = (object)[
 				'coinsValue'        => $coinsValue,
-					'rate'          => getRate('bch'),
+					'rate'          => $rate,
 					'title'         => 'Bitcoin Cash',
 					'code'          => 'BCH',
 					'confirmations' => 1,
@@ -88,7 +88,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 			case 'BTG':
 				$currency = (object)[
 					'coinsValue'    => $coinsValue,
-					'rate'          => getRate('btg'),
+					'rate'          => $rate,
 					'title'         => 'Bitcoin Gold',
 					'code'          => 'BTG',
 					'confirmations' => 1,
@@ -99,7 +99,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 			case 'DASH':
 				$currency = (object)[
 					'coinsValue'    => $coinsValue,
-					'rate'          => getRate('dash'),
+					'rate'          => $rate,
 					'title'         => 'Dash',
 					'code'          => 'DASH',
 					'confirmations' => 3,
@@ -112,7 +112,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 						  return (object)[
 							  'address' => $address,
 							  'coinsValue' => $coinsValue,
-							  'rate' => getRate('xmr'),
+							  'rate' => $rate,
 							  'title' => 'Monero',
 							  'code' => 'XMR',
 							  'confirmations' => 0,
@@ -124,7 +124,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 						  return (object)[
 							  'address' => $address,
 							  'coinsValue' => $coinsValue,
-							  'rate' => getRate('waves'),
+							  'rate' => $rate,
 							  'title' => 'Waves',
 							  'code' => 'WAVES',
 							  'confirmations' => 0,
@@ -136,7 +136,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 						  return (object)[
 							  'address' => $address,
 							  'coinsValue' => $coinsValue,
-							  'rate' => getRate('eos'),
+							  'rate' => $rate,
 							  'title' => 'Eos',
 							  'code' => 'EOS',
 							  'confirmations' => 0,
@@ -148,7 +148,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 						  return (object)[
 							  'address' => $address,
 							  'coinsValue' => $coinsValue,
-							  'rate' => getRate('etc'),
+							  'rate' => $rate,
 							  'title' => 'Eth. Classic',
 							  'code' => 'ETC',
 							  'confirmations' => 0,

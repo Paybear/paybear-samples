@@ -23,8 +23,19 @@ function getAddress(orderId, token, callback) {
 }
 
 function getPayout(token) {
-  //TODO
-  return '0x39ee76948d238fad2b750998f8a38d80c73c7cd7';
+  token = token.toLowerCase();
+
+  var wallets = {
+    eth: '0x39ee76948d238fad2b750998f8a38d80c73c7cd7',
+    btc: '18kHBiQxcnnyoPs1d2R5dqrVevuVhEN7vv',
+    ltc: 'LWUx4FKFXmw1K12GRyZj9RavdBz6jNQNqX',
+    dash: 'XbxkmAFNCRDw7q9KioXSp7J6ENMoCcVfVL',
+    btg: 'GKbvrVyx8i2zHQZKRVvPL5qfLSevRSygry',
+    bch: '1FzabV5rvJ6D2dXaA8QB51eXAFmZ7Pdmzq'
+  };
+
+  if (wallets[token]) return wallets[token];
+  else return null;
 }
 
 function getCurrency(token, orderId, getAddr, callback) {
@@ -157,7 +168,7 @@ function getCurrency(token, orderId, getAddr, callback) {
           callback(currency);
         });
       } else {
-        //$currency->currencyUrl = sprintf('currencies.php?order=%s&token=%s', $orderId, $token); TODO
+        currency['currencyUrl'] = '/paybear/currencies?order=' + orderId + '&token=' + token;
         callback(currency);
       }
     }
