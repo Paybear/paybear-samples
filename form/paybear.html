@@ -1,4 +1,7 @@
-<!--Paybear.io code start-->
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
 <div id="paybear" style="display: none">
     <div class="p30 PayBear-spinner" style="display: none;">
         <p>Loading payment details...</p>
@@ -115,18 +118,15 @@
                         <!-- Payment expired step -->
                         <div class="P-Payment__expired" style="display: none;">
                             <div class="P-Content">
-                                <div class="P-Content__icon">
-                                    <img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjI5OC4zMjUxIiB2aWV3Qm94PSIwIDAgMjk4LjMyNTEgMjk4LjMyNTEiIHdpZHRoPSIyOTguMzI1MSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zOSAtMzcuMzM3MTQ3KSI+PGcgZmlsbC1ydWxlPSJub256ZXJvIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzOSA1NykiPjxwYXRoIGQ9Im0yNzguNzc0MTkgMjU4Ljk5ODhoLTI1OS41NDgzODNjLTEwLjYxODA1MyAwLTE5LjIyNTgwNy04LjU4ODk3LTE5LjIyNTgwNy0xOS4xODUxOCAwLTIuOTQ4NTMgMC0xNC44MTM2MiAxLTEwLjgxMzYyIDIuMzQ0NTEwMiA5LjM3ODA0IDEwLjU2MjUyNS0xOC4zNzE1NyAxOC4yMjU4MDctMTguMzcxNTdoMjU5LjU0ODM4M2M4LjMzMzA1IDAgMTYuNTU4MDggNi4zMjIxMyAxOS4yMjU4MSAxNi4zNzE1Ny43MzE1MiAyLjc1NTY2IDAgMTAuNTMzNDQgMCAxMi44MTM2MiAwIDEwLjU5NjIxLTguNjA3NzUgMTkuMTg1MTgtMTkuMjI1ODEgMTkuMTg1MTh6IiBmaWxsPSIjY2Q0MTJkIi8+PHBhdGggZD0ibTEzNC42MDQwOCA5LjYzNDU2MDJjOC4yNjc2OS0xMi4zNjU0NTE0IDE5LjkxNTUzLTEzLjMxNjMxNzEgMjguODA1NjYgMGwxMjkuNTk0NTUgMjA2LjEwODgzOThjOS42MDMyOSAxNC4zNzAzMSA0Ljc5Njg0IDI0LjA3MDIyLTkuNjAyNjkgMjQuMDcwMjJoLTI2OC44MDU2MDhjLTE0LjQwMDcyOTkgMC0xOS4yMDIzNzUxLTkuNzAxMTEtOS42MDA4ODcyLTI0LjA3MDIyeiIgZmlsbD0iI2YwNWY1MCIvPjwvZz48cGF0aCBkPSJtMTc3LjcwMTMgMjE4Ljk4ODQxaDE3LjU1NDQ3YzIuNjg1MDMgMCA0Ljg5MDctMi4xMjA2OCA0Ljk5NjE0LTQuODAzNjRsMy4zNDAxNi04NC45ODg0MWMuMTA4NDQtMi43NTkzLTIuMDQwNS01LjA4NDA2LTQuNzk5NzktNS4xOTI1LS4wNjU0LS4wMDMtLjEzMDg4LS4wMDQtLjE5NjM1LS4wMDRoLTI0LjIzNDc4Yy0yLjc2MTQzIDAtNSAyLjIzODU4LTUgNSAwIC4wNjU1LjAwMS4xMzA5NC4wMDQuMTk2MzZsMy4zNDAxNiA4NC45ODg0MWMuMTA1NDQgMi42ODI5NiAyLjMxMTExIDQuODAzNjQgNC45OTYxNCA0LjgwMzY0em0tMTEuMDI5MyAzMC40ODc1NWMwIDExLjE5OTUxIDguOTE4MTMgMTkuMjg4MDQgMTkuNDk1NDQgMTkuMjg4MDQgMTAuNzg0NzEgMCAxOS45MTAyMy04LjA4ODUzIDE5LjkxMDIzLTE5LjI4ODA0IDAtMTAuOTkyMTEtOS4xMjU1Mi0xOC44NzMyNC0xOS45MTAyMy0xOC44NzMyNC0xMC41NzczMSAwLTE5LjQ5NTQ0IDcuODgxMTMtMTkuNDk1NDQgMTguODczMjR6IiBmaWxsPSIjZmZmIi8+PC9nPjwvc3ZnPg==">
-                                </div>
-                                <h2>Payment Window Expired</h2>
                                 <p>
-                                    Not to worry, simply go back and start the process
-                                    the same way you did before
+                                    <strong>Your payment window has expired.</strong>
+                                    Hit the Refresh button bellow to lock in
+                                    a new exchange rate and start again.
                                 </p>
                                 <div>
                                     <a href="/" class="P-btn">
-                                        <i class="P-btn__icon P-btn__icon--back"></i>
-                                        Back to Cart
+                                        <i class="P-btn__icon P-btn__icon--refresh-white"></i>
+                                        Refresh
                                     </a>
                                 </div>
                                 <button class="P-Payment__helper">What's a payment window?</button>
@@ -289,15 +289,16 @@
                                         </g>
                                     </svg>
                                 </div>
-                                <h2>Payment Detected</h2>
-                                <p class="P-confirmations">
-                                    ---
+                                <h2 class="P-confirmations">---</h2>
+                                <p>
+                                    <strong>Your order will be processed soon.</strong>
+                                    You can leave this tab open until your payment is confirmed,
+                                    <strong>or</strong> close it and wait for a confirmation email.
                                 </p>
-                                <p>You can freely close this window now!</p>
                                 <div>
-                                    <button class="P-btn">
-                                        <i class="P-btn__icon P-btn__icon--back"></i>
-                                        Back to Cart
+                                    <button class="P-btn P-btn--sm">
+                                        <i class="P-btn__icon--close"></i>
+                                        Close
                                     </button>
                                 </div>
                                 <button class="P-Payment__helper">What does this mean?</button>
@@ -364,4 +365,3 @@
         </div>
     </div>
 </div>
-
