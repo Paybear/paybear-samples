@@ -361,7 +361,7 @@
         var code = selectedCoin.code;
         that.paymentHeader.classList.remove('P-Payment__header--red');
         that.paymentHeaderTitle.textContent = 'Waiting on Payment';
-        that.paymentHeaderHelper.innerHTML = 'Rate Locked 1 ' + code + ' : ' + options.fiatSign + rate + ' ' + options.fiatCurrency;
+        that.paymentHeaderHelper.innerHTML = 'Rate Locked 1 ' + code + ' : ' + options.fiatSign + rate.toFixed(4) + ' ' + options.fiatCurrency;
         that.paymentHeaderHelper.removeAttribute('style');
 
         // timer
@@ -484,7 +484,7 @@
                     var response = JSON.parse(xhr.responseText);
 
                     if (typeof response.confirmations === 'number' || typeof response.maxConfirmations === 'number') {
-                        paybearPaymentConfirming.call(that, response.confirmations || response.maxConfirmations);
+                        paybearPaymentConfirming.call(that, typeof response.confirmations === 'number' ? response.confirmations : response.maxConfirmations);
                     }
 
                     if (response.success) {
@@ -544,6 +544,7 @@
         var state = that.state;
         var isConfirming = state.isConfirming;
         var selectedCoin = state.currencies[state.selected];
+        var coinConfirmations = typeof selectedCoin.confirmations === 'number' ? selectedCoin.confirmations : selectedCoin.maxConfirmations;
 
         if (!isConfirming) {
             if (options.modal) {
@@ -601,10 +602,9 @@
             //header
             that.paymentHeaderTitle.textContent = 'Confirming Payment';
 
-            var coinConfirmations = selectedCoin.confirmations || selectedCoin.maxConfirmations;
             document.querySelector('.P-confirmations')
                 .innerHTML = 'Payment Detected. Waiting for ' + coinConfirmations +
-                (+coinConfirmations === 1 ? ' Confirmation' : ' Confirmations');
+                (coinConfirmations === 1 ? ' Confirmation' : ' Confirmations');
 
             if (options.modal) {
                 paymentConfirming.querySelector('.P-btn').addEventListener('click', function (e) {
@@ -616,8 +616,8 @@
             }
         }
 
-        that.paymentHeaderHelper.textContent = confirmations + ' / ' + coinConfirmations + (+coinConfirmations === 1 ? ' Confirmation' : ' Confirmations');
-        document.querySelector('.Confirming__icon').classList.value = 'Confirming__icon' + (+coinConfirmations < 4 ? ' Confirming__icon--small' : '') + (+coinConfirmations > 4 ? ' Confirming__icon--full' : '');
+        that.paymentHeaderHelper.textContent = confirmations + ' / ' + coinConfirmations + (coinConfirmations === 1 ? ' Confirmation' : ' Confirmations');
+        document.querySelector('.Confirming__icon').classList.value = 'Confirming__icon' + (coinConfirmations < 4 ? ' Confirming__icon--small' : '') + (coinConfirmations > 4 ? ' Confirming__icon--full' : '');
         document.querySelector('.Confirming__icon svg').classList.value = 'Confirming__pic Confirming__pic--' + confirmations;
         this.state.isConfirming = true;
     }
@@ -636,11 +636,11 @@
         paymentConfirmed.removeAttribute('style');
 
         //header
-        var coinConfirmations = selectedCoin.confirmations || selectedCoin.maxConfirmations;
+        var coinConfirmations = +selectedCoin.confirmations || +selectedCoin.maxConfirmations;
         that.paymentHeader.classList.remove('P-Payment__header--red');
         that.paymentHeader.classList.add('P-Payment__header--green');
         that.paymentHeaderTitle.textContent = 'Payment Confimed';
-        that.paymentHeaderHelper.textContent = coinConfirmations + (+coinConfirmations === 1 ? ' Confirmation' : ' Confirmations') + ' found';
+        that.paymentHeaderHelper.textContent = coinConfirmations + (coinConfirmations === 1 ? ' Confirmation' : ' Confirmations') + ' found';
         that.paymentHeaderTimer.style.display = 'none';
         document.querySelector('.P-Payment__header__check').style.display = 'block';
 
