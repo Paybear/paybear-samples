@@ -1,5 +1,5 @@
 <?php
-define('PAYBEAR_SECRET', 'CHANGEME');
+define('PAYBEAR_SECRET', 'secAPIKEY'); //get your key at www.paybear.io
 
 function getAddress($orderId, $token = 'ETH') {
 	$callbackUrl = 'http://CHANGEME.com/callback.php?id='.$orderId;
@@ -37,8 +37,6 @@ function getCurrency($token, $orderId, $getAddress = false) {
 	$rate = getRate($token);
 
 	if ($rate) {
-		if (!getPayout($token)) return null;
-
 		$fiatValue = 19.99; //get from $orderId
 		$coinsValue = round($fiatValue / $rate, 8);
 
