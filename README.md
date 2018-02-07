@@ -251,7 +251,7 @@ The API returns a JSON string containing the rates from several online exchanges
 <h4>PHP example:</h4> More examples: <a href="nodejs">Node.js</a>, <a href="rails">Ruby on Rails</a>
 
 ```php
-$url = "https://api.paybear.io/v1/eth/exchange/usd/rate";
+$url = "https://api.paybear.io/v2/eth/exchange/usd/rate";
 
 if ($response = file_get_contents($url)) {
     $response = json_decode($response);
