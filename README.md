@@ -1,6 +1,8 @@
 <h3>PayBear.io API</h3>
 This API allows to accept <b>Ethereum</b>, <b>Bitcoin</b>, <b>Bitcoin Cash</b>, <b>Bitcoin Gold</b>, <b>Litecoin</b>, <b>Dash</b> and <b>Ethereum Classic</b> payments. More details can be found on our website: https://www.paybear.io
 
+[**Important note for APIv1 users**](UPGRADE.md)
+
 <h3>API Keys</h3>
 In order to use the system you need an API key. Getting a key is free and easy, sign up here:
 https://www.paybear.io
