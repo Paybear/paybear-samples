@@ -269,6 +269,5 @@ However, for DDoS protection reasons, the API calls are limited to 1000 per minu
 
 ### What to use as a payout address?
 You will need payout addresses for all crypto currencies you want to accept. Only you will have access to your payout wallets.
-You can use any online wallet you like or use a paper wallet https://en.bitcoin.it/wiki/Paper_wallet.
-If you don't know how to create one, we suggest using MyEtherWallet https://www.myetherwallet.com/ for Ethereum and BitAddress https://www.bitaddress.org/ for Bitcoin.
-There are many more available options and you can use any wallet, service or exchange of your choice.
+You can use any online wallet, service or exchange of your choice.
+If you don't have one, consider reading our [Wallet Guide](https://www.paybear.io/wallets)
