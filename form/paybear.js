@@ -72,7 +72,7 @@
             fiatCurrency: 'USD',
             fiatSign: '$',
             enableFiatTotal: true,
-            enablePoweredBy: true,
+            enablePoweredBy: false,
             enableBack: true,
             redirectTimeout: 5,
         };
@@ -357,11 +357,11 @@
         that.paymentBlock.removeAttribute('style');
 
         var selectedCoin = state.currencies[state.selected];
-        var rate = selectedCoin.rate;
+        var rate = +selectedCoin.rate;
         var code = selectedCoin.code;
         that.paymentHeader.classList.remove('P-Payment__header--red');
         that.paymentHeaderTitle.textContent = 'Waiting on Payment';
-        that.paymentHeaderHelper.innerHTML = 'Rate Locked 1 ' + code + ' : ' + options.fiatSign + rate.toFixed(4) + ' ' + options.fiatCurrency;
+        that.paymentHeaderHelper.innerHTML = 'Rate Locked 1 ' + code + ' : ' + options.fiatSign + formatMoney(rate, 2) + ' ' + options.fiatCurrency;
         that.paymentHeaderHelper.removeAttribute('style');
 
         // timer
@@ -408,6 +408,7 @@
         // qr code
         var qr = document.querySelector('.P-Payment__qr img');
         if (selectedCoin.walletLink) {
+            selectedCoin.walletLink = selectedCoin.walletLink.replace(/%s(.+?)%s/, selectedCoin.address + '$1' + selectedCoin.coinsValue);
             qr.setAttribute('src', 'https://chart.googleapis.com/chart?chs=180x180&cht=qr&chl=' + encodeURIComponent(selectedCoin.walletLink));
         } else {
             qr.setAttribute('src', 'https://chart.googleapis.com/chart?chs=180x180&cht=qr&chl=' + encodeURIComponent(selectedCoin.address));
@@ -477,26 +478,36 @@
         // tabs
         paybearTabs.call(that);
 
-        state.checkStatusInterval = setInterval(function () {
-            var xhr = new XMLHttpRequest();
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
+        checkStatusXHR(options.statusUrl);
 
-                    if (typeof response.confirmations === 'number' || typeof response.maxConfirmations === 'number') {
-                        paybearPaymentConfirming.call(that, typeof response.confirmations === 'number' ? response.confirmations : response.maxConfirmations);
-                    }
+        function checkStatusXHR(statusUrl) {
+            state.checkStatusInterval = setInterval(function () {
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if ((typeof response.confirmations === 'number' || typeof response.confirmations === 'string') && !Number.isNaN(+response.confirmations)) {
+                            paybearPaymentConfirming.call(that, response.confirmations);
+                        }
 
-                    if (response.success) {
-                        clearInterval(state.checkStatusInterval);
-                        paybearPaymentConfirmed.call(that, response.redirect_url);
+                        if (response.statusUrl) {
+                            var parser = document.createElement('a');
+                            parser.href = options.statusUrl;
+                            clearInterval(state.checkStatusInterval);
+                            checkStatusXHR(parser.protocol + '//' + parser.host + response.statusUrl);
+                        }
+
+                        if (response.success) {
+                            clearInterval(state.checkStatusInterval);
+                            paybearPaymentConfirmed.call(that, response.redirect_url);
+                        }
                     }
-                }
-            };
-            xhr.open('GET', options.statusUrl, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send();
-        }, 10000);
+                };
+                xhr.open('GET', statusUrl, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send();
+            }, 10000);
+        }
     }
 
     function paybearPaymentExpired() {
@@ -544,7 +555,7 @@
         var state = that.state;
         var isConfirming = state.isConfirming;
         var selectedCoin = state.currencies[state.selected];
-        var coinConfirmations = typeof selectedCoin.confirmations === 'number' ? selectedCoin.confirmations : selectedCoin.maxConfirmations;
+        var coinConfirmations = selectedCoin.maxConfirmations;
 
         if (!isConfirming) {
             if (options.modal) {
@@ -630,13 +641,15 @@
         clearInterval(state.interval);
         clearInterval(state.checkStatusInterval);
 
+        var paymentStart = document.querySelector('.P-Payment__start');
         var paymentConfirming = document.querySelector('.P-Payment__confirming');
         var paymentConfirmed = document.querySelector('.P-Payment__confirmed');
+        paymentStart.style.display = 'none';
         paymentConfirming.style.display = 'none';
         paymentConfirmed.removeAttribute('style');
 
         //header
-        var coinConfirmations = +selectedCoin.confirmations || +selectedCoin.maxConfirmations;
+        var coinConfirmations = +selectedCoin.maxConfirmations;
         that.paymentHeader.classList.remove('P-Payment__header--red');
         that.paymentHeader.classList.add('P-Payment__header--green');
         that.paymentHeaderTitle.textContent = 'Payment Confimed';
@@ -863,6 +876,16 @@
         }
 
         return selectedText;
+    }
+
+    function formatMoney(n, c, d, t) {
+        var c = isNaN(c = Math.abs(c)) ? 2 : c,
+            d = d == undefined ? "." : d,
+            t = t == undefined ? "," : t,
+            s = n < 0 ? "-" : "",
+            i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+            j = (j = i.length) > 3 ? j % 3 : 0;
+        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
     }
 
     function paybearResizeFont(address) {
