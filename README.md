@@ -1,11 +1,39 @@
 <h3>PayBear.io API</h3>
-This API allows to accept <b>Ethereum</b>, <b>Bitcoin</b>, <b>Bitcoin Cash</b>, <b>Bitcoin Gold</b>, <b>Litecoin</b> and <b>Dash</b> payments. More details and pricing can be found on our website: https://www.paybear.io
+This API allows to accept <b>Ethereum</b>, <b>Bitcoin</b>, <b>Bitcoin Cash</b>, <b>Bitcoin Gold</b>, <b>Litecoin</b>, <b>Dash</b> and <b>Ethereum Classic</b> payments. More details can be found on our website: https://www.paybear.io
+
+[**Important note for APIv1 users**](UPGRADE.md)
+
+<h3>API Keys</h3>
+In order to use the system you need an API key. Getting a key is free and easy, sign up here:
+https://www.paybear.io
+
+<h3>Multiple Currencies</h3>
+Once registered, you can manage the currencies you want to integrate in the Membership area / Currencies. Please enable the currencies there before using this API.
+
+<h3>Get Currencies</h3>
+<h4>Get a list of enabled currencies with this GET request:</h4>
+<table border="0" cellspacing="0" cellpadding="10" >
+        <tbody><tr>
+            <td>GET</td>
+            <td>https://api.paybear.io/v2/currencies?token={token}</td>
+        </tr>
+    </tbody>
+</table>
+<h4>Parameters:</h4>
+<table>
+  <tbody>
+  <tr>
+      <td>token</td>
+      <td>API Secret Key</td>
+    </tr>
+</tbody></table>
+
 <h3>Create payment request</h3>
 <h4>Use GET query to create payment request:</h4>
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
-            <td>https://api.paybear.io/v1/{crpyto}/payment/{payout_address}/{callback_url}</td>
+            <td>https://api.paybear.io/v2/{crpyto}/payment/{callback_url}?token={token}</td>
         </tr>
     </tbody>
 </table>
@@ -14,41 +42,30 @@ This API allows to accept <b>Ethereum</b>, <b>Bitcoin</b>, <b>Bitcoin Cash</b>, 
   <tbody>
   <tr>
       <td>crypto</td>
-      <td>Crpyto currency to accept (eth, btc, bch, ltc, dash, btg)</a></td>
+      <td>Crpyto currency to accept (eth, btc, bch, ltc, dash, btg, etc)</td>
     </tr>
   <tr>
-    <td>payout_address</td>
-    <td>Your address for payouts <a href="#where-can-i-get-my-payout-address">(?)</a></td>
+    <td>token</td>
+    <td>API Secret Key</td>
   </tr>
 </tbody></table>
 <h4>Optional parameters:</h4>
 <table>
   <tr>
-    <td>fee_level (GET parameter)</td>
-    <td>Fee level, optional, default "Normal"</td>
-  </tr>
-  <tr>
         <td>callback_url</td>
         <td>Your server callback url (urlencoded)</td>
     </tr>
 </table>
-<h4>Fee levels:</h4>
-<table>
-    <tr><td>Blockchain</td><td>Slow</td><td>Normal (default)</td><td>Fast</td><td>Flash</td></tr>
-    <tr><td>Ethereum <a href="http://ethgasstation.info/FAQpage.php">Gas price</a></td><td>1 GWei</td><td>4 GWei</td><td>20 GWei</td><td>40 GWei</td></tr>
-    <tr><td>Bitcoin</td><td>0.0000226 BTC</td><td>0.000113 BTC</td><td>0.0002938 BTC</td><td>0.0004746 BTC</td></tr>
-    <tr><td>Bitcoin Cash</td><td>0.0000226 BCH</td><td>0.0000452 BCH</td><td>0.000904 BCH</td><td>0.0001356 BCH</td></tr>
-    <tr><td>Bicoin Gold</td><td>0.0000226 BTG</td><td>0.0000452 BTG</td><td>0.000904 BTG</td><td>0.0001356 BTG</td></tr>
-    <tr><td>Litecoin</td><td>0.00199784 LTC</td><td>0.00299676 LTC</td><td>0.00399568 LTC</td><td>0.0049946 LTC</td></tr>
-    <tr><td>Dash</td><td>FREE</td><td>0.00009944 DASH</td><td>0.00014916 DASH</td><td>0.00019888 DASH</td></tr>
-</table>
-Detailed information and approximate confirmation times can be found in our <a href="https://www.paybear.io/pricing">Pricing</a> page.
+
 
 <h4>Example request URL:</h4>
-<a href="https://api.paybear.io/v1/eth/payment/0x39ee76948d238fad2b750998f8a38d80c73c7cd7/http%3A%2F%2Fputsreq.com%2FUv8u7ofxXDWVoaVawDWd/?fee_level=normal">
-https://api.paybear.io/v1/eth/payment/0x39ee76948d238fad2b750998f8a38d80c73c7cd7/http%3A%2F%2Fputsreq.com%2FUv8u7ofxXDWVoaVawDWd/?fee_level=normal</a>
+<a href="https://api.paybear.io/v2/eth/payment/http%3A%2F%2Fputsreq.com%2FUv8u7ofxXDWVoaVawDWd/?token=YOURSECRET">
+https://api.paybear.io/v2/eth/payment/http%3A%2F%2Fputsreq.com%2FUv8u7ofxXDWVoaVawDWd/?token=YOURSECRET</a>
 <h4>Response:</h4>
-<p>The API always responds with a JSON string. [data] collection contains the important values: [address] is the payment address to show to the customer, [invoice] is our inner payment identifier, keep it in a safe place and never disclose to your clients.</p>
+<p>The API always responds with a JSON string. [data] collection contains the important values:
+[address] is the payment address to show to the customer
+[invoice] is our inner payment identifier, keep it in a safe place and never disclose to your clients.</p>
+
 <h4>Response example:</h4>
 <p>
 
@@ -66,10 +83,10 @@ https://api.paybear.io/v1/eth/payment/0x39ee76948d238fad2b750998f8a38d80c73c7cd7
 
 ```php
 $orderId = 12345;
-$payoutAddress = '0x39EE76948d238Fad2b750998F8A38d80c73c7Cd7'; //your address
+$apiSecret = 'YOURSECRET'; //your api key
 $callbackUrl = 'http://CHANGEME.com/callback.php?id='.$orderId;
 
-$url = sprintf('https://api.paybear.io/v1/eth/payment/%s/%s', $payoutAddress, urlencode($callbackUrl));
+$url = sprintf('https://api.paybear.io/v2/eth/payment/%s?token=%s', urlencode($callbackUrl), $apiSecret);
 if ($response = file_get_contents($url)) {
     $response = json_decode($response);
     if (isset($response->data->address)) {
@@ -86,7 +103,8 @@ A callback is sent every time a new block is mined. To stop further callbacks, r
 ```json
 {
     "invoice": "7e691214bebe31eaa4b813c59825391b",
-    "confirmations": 4,
+    "confirmations": 2,
+    "maxConfirmations": 4,
     "blockchain": "eth",
     "block": {
         "number": 4316966,  
@@ -110,7 +128,7 @@ if ($data) {
     $params = json_decode($data);
     $invoice = $params->invoice;
     $amount = $params->inTransaction->amount
-    if ($params->confirmations>=CONFIRMATIONS) {
+    if ($params->confirmations>=$params->maxConfirmations) {
         //compare $amount with order total
         //compare $invoice with one saved in the database to ensure callback is legitimate
         //mark the order as paid
@@ -127,7 +145,7 @@ if ($data) {
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
-            <td><a href="https://api.paybear.io/v1/exchange/usd/rate">https://api.paybear.io/v1/exchange/{fiat}/rate</a></td>
+            <td><a href="https://api.paybear.io/v2/exchange/usd/rate">https://api.paybear.io/v2/exchange/{fiat}/rate</a></td>
         </tr>
     </tbody>
 </table>
@@ -197,7 +215,7 @@ The API returns a JSON string containing the rates from several online exchanges
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
-            <td><a href="https://api.paybear.io/v1/eth/exchange/usd/rate">https://api.paybear.io/v1/{crypto}/exchange/{fiat}/rate</a></td>
+            <td><a href="https://api.paybear.io/v2/eth/exchange/usd/rate">https://api.paybear.io/v2/{crypto}/exchange/{fiat}/rate</a></td>
         </tr>
     </tbody>
 </table>
@@ -235,7 +253,7 @@ The API returns a JSON string containing the rates from several online exchanges
 <h4>PHP example:</h4> More examples: <a href="nodejs">Node.js</a>, <a href="rails">Ruby on Rails</a>
 
 ```php
-$url = "https://api.paybear.io/v1/eth/exchange/usd/rate";
+$url = "https://api.paybear.io/v2/eth/exchange/usd/rate";
 
 if ($response = file_get_contents($url)) {
     $response = json_decode($response);
@@ -249,8 +267,7 @@ if ($response = file_get_contents($url)) {
 The system is designed to process thousands of transactions per second, so we do not limit the number of payments you can process.
 However, for DDoS protection reasons, the API calls are limited to 1000 per minute from one IP.
 
-### Where can I get my payout address?
-You will need payout addresses for all crypto currencies to get your payout money. Only you will have access to your payout wallets.
-You can use any online wallet you like or use a paper wallet https://en.bitcoin.it/wiki/Paper_wallet.
-If you don't know how to create one, we suggest using MyEtherWallet https://www.myetherwallet.com/ for Ethereum and BitAddress https://www.bitaddress.org/ for Bitcoin.
-There are many more available options and you can use any wallet of your choice.
+### What to use as a payout address?
+You will need payout addresses for all crypto currencies you want to accept. Only you will have access to your payout wallets.
+You can use any online wallet, service or exchange of your choice.
+If you don't have one, consider reading our [Wallet Guide](https://www.paybear.io/wallets)

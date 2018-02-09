@@ -13,12 +13,16 @@ app.get('/paybear/currencies', (req, res) => {
       res.json(curr); //return this data to PayBear form
     });
   } else {
-    var currs = [];
-    ['ETH', 'BTC', 'LTC', 'BCH', 'BTG', 'DASH'].forEach(function(token) {
-      getCurrency(token, orderId, true, function(curr) {
-        currs.push(curr);
-      });
+    currs = [];
+    getCurrencies(function(currs) {
+        currs.forEach(function(curr) {
+            getCurrency(curr.code, orderId, true, function(currency) {
+                currs.push(currency);
+            });
+        });
     });
+
+
     var i = setInterval(function() {
       if (currs.length >= 6) {
         clearInterval(i);

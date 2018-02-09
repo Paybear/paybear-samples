@@ -227,6 +227,13 @@
             coin.onclick = function (e) {
                 e.preventDefault();
 
+                if (typeof that.options.onclick === 'function') {
+                    console.log('Custom onclick:');
+                    var result = that.options.onclick(item);
+                    console.log('Custom onclick returned ', result);
+                    if (!result) return;
+                }
+
                 if (item.currencyUrl) {
                     var xhr = new XMLHttpRequest();
                     beforeCurrencySend.call(that);
