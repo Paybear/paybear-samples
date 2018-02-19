@@ -153,10 +153,10 @@
 
         if (typeof options.currencies === 'string') {
             fetchCurrencies.call(that);
-        } else if (Array.isArray(options.currencies)) {
+        } else if (Array.isArray(options.currencies) && options.currencies.length) {
             state.currencies = options.currencies;
 
-            if (state.currencies.length > 1) {
+            if (state.currencies.length) {
                 fillCoins.call(that);
             } else {
                 if (state.currencies[state.selected].currencyUrl) {
