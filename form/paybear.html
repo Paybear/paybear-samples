@@ -14,16 +14,11 @@
             <div class="PayBear">
                 <!-- PayBear header -->
                 <div class="PayBear__Nav">
-                    <div>
-                        <a href="/" class="PayBear__Nav__arrow" style="display: none;">
-                            <svg height="22" width="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m15.605355 8.8542609h-13.7616838c-1.01823148 0-1.8436712.82344-1.8436712 1.8392051 0 1.015764.82543972 1.839205 1.8436712 1.839205h14.3762408l-2.483628 2.47761c-.719998.718254-.719998 1.882774 0 2.601028.719999.718255 1.887347.718255 2.607345 0l5.116373-5.103976c.412815-.411816.588939-.970336.528375-1.507333.06056-.536997-.11556-1.0955171-.528375-1.5073331l-5.116373-5.1039766c-.719998-.718254-1.887346-.718254-2.607345 0-.719998.718255-.719998 1.8827736 0 2.6010286z"></path>
-                            </svg>
-                        </a>
-                        <div class="PayBear__Nav__price" style="display: none;">
-                            $<span>--</span> USD
-                        </div>
-                    </div>
+                    <a href="/" class="PayBear__Nav__arrow" style="display: none;">
+                        <svg height="22" width="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m15.605355 8.8542609h-13.7616838c-1.01823148 0-1.8436712.82344-1.8436712 1.8392051 0 1.015764.82543972 1.839205 1.8436712 1.839205h14.3762408l-2.483628 2.47761c-.719998.718254-.719998 1.882774 0 2.601028.719999.718255 1.887347.718255 2.607345 0l5.116373-5.103976c.412815-.411816.588939-.970336.528375-1.507333.06056-.536997-.11556-1.0955171-.528375-1.5073331l-5.116373-5.1039766c-.719998-.718254-1.887346-.718254-2.607345 0-.719998.718255-.719998 1.8827736 0 2.6010286z"></path>
+                        </svg>
+                    </a>
                     <div class="PayBear__brand-link" style="display: none;">
                         <span>
                             Powered by <a href="https://www.paybear.io" target="_blank" rel="noopener noreferrer">
@@ -51,11 +46,14 @@
                     <div class="P-box__inner">
                         <!-- First payment step -->
                         <div class="P-Payment__start">
-                            <div class="P-Payment__value">
-                                <span class="P-Payment__value__icon">
+                            <div class="P-Payment__value P-Payment__value--flex">
+                                <div class="P-Payment__value__icon">
                                     <img src="">
-                                </span>
-                                <span class="P-Payment__value__pay">PAY <span class="P-Payment__value__coins"></span></span>
+                                </div>
+                                <div>
+                                    <div class="P-Payment__value__pay"><span class="P-Payment__value__coins"></span></div>
+                                    <div class="P-Payment__value__price" style="display: none;">---</div>
+                                </div>
                             </div>
                             <div class="P-Tabs" id="paybear-tabs">
                                 <ul class="P-Tabs__Tab-list P-Tabs__Tab-list--second">

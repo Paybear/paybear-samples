@@ -64,7 +64,6 @@
             isConfirming: false,
             html: null,
             isModalShown: false,
-            coinsPaid: 0,
         };
 
         var defaults = {
@@ -143,10 +142,6 @@
             initModal.call(that);
         }
 
-        if (options.enableFiatTotal && options.fiatValue) {
-            document.querySelector('.PayBear__Nav__price').removeAttribute('style');
-            document.querySelector('.PayBear__Nav__price').innerHTML = options.fiatSign + '<span>' + options.fiatValue.toFixed(2) + '</span>' + options.fiatCurrency;
-        }
         if (options.enablePoweredBy) {
             document.querySelector('.PayBear__brand-link').removeAttribute('style');
         }
@@ -156,7 +151,7 @@
         } else if (Array.isArray(options.currencies) && options.currencies.length) {
             state.currencies = options.currencies;
 
-            if (state.currencies.length) {
+            if (state.currencies.length > 1) {
                 fillCoins.call(that);
             } else {
                 if (state.currencies[state.selected].currencyUrl) {
@@ -418,7 +413,15 @@
         var value = document.querySelector('.P-Payment__value__coins');
         var coinsPaid = selectedCoin.coinsPaid ? selectedCoin.coinsPaid : 0;
         var coinsToPay = (selectedCoin.coinsValue - coinsPaid).toFixed(8);
-        value.textContent = coinsToPay + ' ' + selectedCoin.code;
+        if ((+coinsToPay).toString().length < 6) document.querySelector('.P-Payment__value').classList.add('P-Payment__value--flex');
+        value.textContent = +coinsToPay + ' ' + selectedCoin.code;
+
+        // fiat value
+        if (options.enableFiatTotal && options.fiatValue) {
+            document.querySelector('.P-Payment__value__price').removeAttribute('style');
+            var fiatValue = coinsPaid > 0 ? Math.round(selectedCoin.rate * coinsToPay * 100) / 100 : options.fiatValue;
+            document.querySelector('.P-Payment__value__price').innerHTML = options.fiatSign + '<span>' + (fiatValue).toFixed(2) + '</span>&nbsp;' + options.fiatCurrency;
+        }
 
 
         // qr code
@@ -483,7 +486,7 @@
 
         // copy value btn
         var copy = document.querySelector('.P-Payment__value__copy');
-        copy.querySelector('.P-btn-block__helper').innerHTML = coinsToPay;
+        copy.querySelector('.P-btn-block__helper').innerHTML = +coinsToPay + '&nbsp;' + selectedCoin.code;
         copy.addEventListener('click', function () {
             copyAddress.classList.remove('P-btn-block--copied');
             copy.classList.remove('P-btn-block--copied');
@@ -513,12 +516,13 @@
                             paymentConfirmed.call(that, response.redirect_url, overPaid);
                         } else {
                             if (response.coinsPaid !== null) {
-                                if (response.coinsPaid > state.coinsPaid) {
+                                if (response.coinsPaid > coinsPaid) {
                                     var maxUnderpaymentCrypto = +(options.maxUnderpaymentFiat / selectedCoin.rate).toFixed(8);
+                                    var diff = +(selectedCoin.coinsValue - coinsPaid - response.coinsPaid).toFixed(8);
+                                    selectedCoin.coinsPaid = response.coinsPaid;
 
-                                    state.coinsPaid = response.coinsPaid;
                                     if (response.coinsPaid < selectedCoin.coinsValue - maxUnderpaymentCrypto) {
-                                        paymentUnpaid.call(that, response.coinsPaid)
+                                        paymentUnpaid.call(that, diff);
                                     } else {
                                         checkConfirmations = true;
                                     }
@@ -548,7 +552,7 @@
         }
     }
 
-    function paymentUnpaid(paid) {
+    function paymentUnpaid(diff) {
         var that = this;
         var state = that.state;
         var options = that.options;
@@ -562,9 +566,6 @@
         that.topBackButton.style.display = 'none';
         unpaidScreen.removeAttribute('style');
 
-        var coinsPaid = selectedCoin.coinsPaid ? selectedCoin.coinsPaid : 0;
-        var diff = +(selectedCoin.coinsValue - coinsPaid - paid).toFixed(8);
-
         var unpaidScreenBtn = unpaidScreen.querySelector('button');
         unpaidScreenBtn.innerHTML =
             'Pay ' + diff + ' ' +
@@ -573,7 +574,6 @@
             '&nbsp;' + options.fiatCurrency + ')';
 
         unpaidScreenBtn.addEventListener('click', function toStartScreen() {
-            selectedCoin.coinsPaid = paid;
             unpaidScreen.style.display = 'none';
             that.paymentHeader.removeAttribute('style');
             paymentStart.call(that, true);
