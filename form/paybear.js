@@ -64,6 +64,7 @@
             isConfirming: false,
             html: null,
             isModalShown: false,
+            unloadBound: false,
         };
 
         var defaults = {
@@ -213,6 +214,8 @@
 
         fillCoinsReset.call(that);
 
+        bindUnloadHandler.call(that);
+
         var coinsContainer = that.coinsBlock;
         coinsContainer.innerHTML = '';
 
@@ -276,6 +279,9 @@
 
     function fillCoinsReset() {
         var that = this;
+
+        unbindUnloadHandler.call(that);
+
         var state = that.state;
         var options = that.options;
         if (state.paymentsHtml) {
@@ -322,11 +328,17 @@
         var state = that.state;
         var options = that.options;
 
+        bindUnloadHandler.call(that);
+
         if (!that.state.currencies[that.state.selected].address) {
             handleCurrencyError.call(that);
             throw new Error(
                 'Currency address is undefined'
             );
+        }
+
+        if (options.unloadHandler) {
+            window.addEventListener('beforeunload', options.unloadHandler);
         }
 
         // clear payments start events
@@ -584,6 +596,9 @@
     function paymentExpired() {
         var that = this;
         var options = that.options;
+
+        unbindUnloadHandler.call(that);
+
         var state = that.state;
         clearInterval(state.interval);
         clearInterval(state.checkStatusInterval);
@@ -711,6 +726,9 @@
         var that = this;
         var state = that.state;
         var options = that.options;
+
+        unbindUnloadHandler.call(that);
+
         var selectedCoin = state.currencies[state.selected];
         clearInterval(state.interval);
         clearInterval(state.checkStatusInterval);
@@ -1114,6 +1132,8 @@
     function hideModal() {
         var that = this;
 
+        unbindUnloadHandler.call(that);
+
         that.state.isModalShown = false;
 
         var event = document.createEvent('HTMLEvents');
@@ -1151,6 +1171,24 @@
             hideModal.call(that);
             this.removeEventListener('click', errorClose, false);
         }, false);
+    }
+
+    function bindUnloadHandler() {
+        var that = this;
+        var options = that.options;
+        if (options.unloadHandler && !that.state.unloadBound) {
+            that.state.unloadBound = true;
+            window.addEventListener('beforeunload', options.unloadHandler);
+        }
+    }
+
+    function unbindUnloadHandler() {
+        var that = this;
+        var options = that.options;
+        if (options.unloadHandler && that.state.unloadBound) {
+            that.state.unloadBound = false;
+            window.removeEventListener('beforeunload', options.unloadHandler);
+        }
     }
 
 }());
