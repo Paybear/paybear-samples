@@ -33,7 +33,7 @@ Once registered, you can manage the currencies you want to integrate in the Memb
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
-            <td>https://api.paybear.io/v2/{crpyto}/payment/{callback_url}?token={token}</td>
+            <td>https://api.paybear.io/v2/{crypto}/payment/{callback_url}?token={token}</td>
         </tr>
     </tbody>
 </table>
@@ -42,7 +42,7 @@ Once registered, you can manage the currencies you want to integrate in the Memb
   <tbody>
   <tr>
       <td>crypto</td>
-      <td>Crpyto currency to accept (eth, btc, bch, ltc, dash, btg, etc)</td>
+      <td>crypto currency to accept (eth, btc, bch, ltc, dash, btg, etc)</td>
     </tr>
   <tr>
     <td>token</td>
@@ -225,7 +225,7 @@ The API returns a JSON string containing the rates from several online exchanges
   <tbody>
   <tr>
     <td>crypto</td>
-    <td>Crpyto currency (eth, btc, bch, ltc, dash, btg)</a></td>
+    <td>crypto currency (eth, btc, bch, ltc, dash, btg)</a></td>
   </tr>
   <tr>
       <td>fiat</td>
