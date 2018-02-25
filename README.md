@@ -42,7 +42,7 @@ Once registered, you can manage the currencies you want to integrate in the Memb
   <tbody>
   <tr>
       <td>crypto</td>
-      <td>Crpyto currency to accept (eth, btc, bch, ltc, dash, btg, etc)</td>
+      <td>Crypto currency to accept (eth, btc, bch, ltc, dash, btg, etc)</td>
     </tr>
   <tr>
     <td>token</td>
