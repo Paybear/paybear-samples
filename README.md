@@ -211,7 +211,8 @@ The API returns a JSON string containing the rates from several online exchanges
 }
 ```
 
-<h4>Exchange rates for one currency:</h4>
+<h4>Exchange rates for one currency*:</h4>
+*If you are using more than one currency, we recommend usng the call above to get all rates with one request.
 <table border="0" cellspacing="0" cellpadding="10" >
         <tbody><tr>
             <td>GET</td>
