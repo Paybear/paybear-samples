@@ -6,6 +6,8 @@ app.post('/paybear/callback/:order', (req, res) => {
   var data = req.body;
   var invoice = data.invoice;
 
+  //save data.confirmations - number of confirmations to DB
+
   if(data.confirmations >= data.maxConfirmations) {
     var amountPaid = data.inTransaction.amount / Math.pow(10, data.inTransaction.exp);
     //compare $amountPaid with order total
@@ -13,8 +15,6 @@ app.post('/paybear/callback/:order', (req, res) => {
     //mark the order as paid
     res.send(invoice); //stop further callbacks
   } else {
-    //save data.confirmations - number of confirmations to DB
-    //save data.maxConfirmations - confirmation thresold to DB
     res.send('waiting for confirmations');
   }
 } else {

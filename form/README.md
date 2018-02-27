@@ -3,8 +3,8 @@
 1. Include CSS and JS files. Insert the following code before `</head>` or immediately after `<body>`.
 
 ```
-<script src="paybear.js"></script>
-<link rel="stylesheet" href="paybear.css" />
+<script type="text/javascript" src="paybear.js"></script>
+<link rel="stylesheet" type="text/css" href="paybear.css" />
 ```
 
 2. Paste the contents of `paybear.html` to the place where your form should appear.

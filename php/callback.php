@@ -6,6 +6,8 @@ if ($data) {
     $params = json_decode($data);
     $invoice = $params->invoice;
 
+	//save number of confirmations to DB: $params->confirmations
+
     if ($params->confirmations >= $params->maxConfirmations) {
         $amountPaid = $params->inTransaction->amount / pow(10, $params->inTransaction->exp);
         //compare $amountPaid with order total
@@ -13,9 +15,6 @@ if ($data) {
         //mark the order as paid
         echo $invoice; //stop further callbacks
     } else {
-		//save number of confirmations to DB: $params->confirmations
-		//save maxConfirmations to DB: $params->maxConfirmations
-
         die("waiting for confirmations");
     }
 }
