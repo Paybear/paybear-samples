@@ -496,16 +496,17 @@
         // tabs
         paybearTabs.call(that);
 
-        checkStatusXHR(options.statusUrl);
+        var statusUrl = selectedCoin.statusUrl || options.statusUrl;
 
-        function checkStatusXHR(statusUrl) {
+        checkStatusXHR(statusUrl);
+
+        function checkStatusXHR(url) {
             state.checkStatusInterval = setInterval(function () {
                 var xhr = new XMLHttpRequest();
                 xhr.onload = function () {
                     if (xhr.status === 200) {
                         var response = JSON.parse(xhr.responseText);
-                        var checkConfirmations  = false;
-
+                        var checkConfirmations = false;
                         if (response.success) {
                             var overPaid = false;
                             var minOverpaymentCrypto = +(options.minOverpaymentFiat / selectedCoin.rate).toFixed(8);
@@ -514,7 +515,7 @@
                             }
                             paymentConfirmed.call(that, response.redirect_url, overPaid);
                         } else {
-                            if (response.coinsPaid !== null) {
+                            if (response.coinsPaid) {
                                 if (response.coinsPaid > coinsPaid) {
                                     var maxUnderpaymentCrypto = +(options.maxUnderpaymentFiat / selectedCoin.rate).toFixed(8);
                                     var diff = +(selectedCoin.coinsValue - coinsPaid - response.coinsPaid).toFixed(8);
@@ -544,7 +545,7 @@
                         }
                     }
                 };
-                xhr.open('GET', statusUrl, true);
+                xhr.open('GET', url, true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send();
             }, 10000);
