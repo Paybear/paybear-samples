@@ -6,10 +6,11 @@ def status
 
     confirmations = nil
 
-    confirmations = 0 # get from DB, see callback.php
+    confirmations = 0 # get from DB, see callback.rb
+    max_confirmations = 3 # get from DB, see callback.rb
 
     data = {
-      success: confirmations >= @MIN_CONFIRMATIONS
+      success: confirmations >= max_confirmations
     }
 
     if confirmations
