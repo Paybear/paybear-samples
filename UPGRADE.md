@@ -11,7 +11,7 @@ Step-by-step instructions are below:
  3. Get your API keys
  4. Change `/v1/` in API URLs to `/v2/`
  5. Use `/v2/currencies?token={token}` to get currency list. If you had the list hardcoded in your code, you can remove it now. Make sure you save or cache this list for at least 5-10 minutes, otherwise you may hit the Rate Limit for your API key.
- 6. Change the call generating wallets to the new format: `/v2/{crpyto}/payment/{callback_url}?token={token}`
+ 6. Change the call generating wallets to the new format: `/v2/{crypto}/payment/{callback_url}?token={token}`
  7. Make a test payment
 
 ### Need help?
