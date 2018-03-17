@@ -694,7 +694,16 @@
                 .innerHTML = 'Payment Detected. Waiting for ' + coinConfirmations +
                 (coinConfirmations === 1 ? ' Confirmation' : ' Confirmations');
 
-            if (options.modal) {
+            if (options.redirectPendingTo) {
+                paymentConfirming.querySelector('.P-btn').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (typeof options.redirectPendingTo === 'string') {
+                        window.location = options.redirectPendingTo;
+                        return false;
+                    }
+                    options.redirectPendingTo();
+                });
+            } else if (options.modal) {
                 paymentConfirming.querySelector('.P-btn').addEventListener('click', function (e) {
                     e.preventDefault();
                     hideModal.call(that);
