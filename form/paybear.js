@@ -182,9 +182,12 @@
             } else {
                 try {
                     var response = JSON.parse(xhr.responseText);
-                    if (Array.isArray(response)) {
+                    if (Array.isArray(response) || typeof response === 'object') {
                         handleCurrenciesSuccess();
                         var currencies = response;
+                        if (typeof response === 'object') {
+                            currencies = [response];
+                        }
                         state.currencies  = currencies;
 
                         if (currencies.length > 1) {
