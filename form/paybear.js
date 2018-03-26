@@ -673,13 +673,13 @@
                 var blockExplorer = state.currencies[state.selected].blockExplorer;
                 paymentConfirming.style.display = 'none';
                 paymentHelper.removeAttribute('style');
-                if (paymentHelper.clientHeight > document.querySelector('.P-box__inner').clientHeight) {
-                    paymentHelper.style.overflowY = 'scroll';
-                }
                 if (blockExplorer) {
                     var blockExplorerLink = blockExplorer.replace(/%s/g, selectedCoin.address);
                     paymentHelper.querySelector('.block-explorer-li').style.display = 'block';
                     paymentHelper.querySelector('.P-block-explorer').setAttribute('href', blockExplorerLink);
+                }
+                if (paymentHelper.clientHeight > document.querySelector('.P-box__inner').clientHeight) {
+                    paymentHelper.style.overflowY = 'scroll';
                 }
             });
             paymentHelperBtn.addEventListener('click', function () {
