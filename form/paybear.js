@@ -323,8 +323,6 @@
         var state = that.state;
         var options = that.options;
 
-        bindUnloadHandler.call(that);
-
         if (!that.state.currencies[that.state.selected].address) {
             handleCurrencyError.call(that);
             throw new Error(
@@ -332,9 +330,7 @@
             );
         }
 
-        if (options.unloadHandler) {
-            window.addEventListener('beforeunload', options.unloadHandler);
-        }
+        bindUnloadHandler.call(that);
 
         // clear payments start events
         var temp = document.createElement('div');
@@ -648,6 +644,8 @@
         var coinConfirmations = selectedCoin.maxConfirmations;
 
         if (!isConfirming) {
+
+            unbindUnloadHandler.call(that);
 
             that.topBackButton.style.display = 'none';
 
