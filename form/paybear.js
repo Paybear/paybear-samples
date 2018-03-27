@@ -679,14 +679,21 @@
                     paymentHelper.querySelector('.block-explorer-li').style.display = 'block';
                     paymentHelper.querySelector('.P-block-explorer').setAttribute('href', blockExplorerLink);
                 }
-                if (paymentHelper.clientHeight > document.querySelector('.P-box__inner').clientHeight) {
-                    paymentHelper.style.overflowY = 'scroll';
-                }
+                paymentHelperOverflow();
+                window.addEventListener('resize', paymentHelperOverflow);
+
             });
             paymentHelperBtn.addEventListener('click', function () {
+                window.removeEventListener('resize', paymentHelperOverflow);
                 paymentConfirming.removeAttribute('style');
                 paymentHelper.style.display = 'none';
             });
+            function paymentHelperOverflow() {
+                paymentHelper.removeAttribute('style');
+                if (paymentHelper.clientHeight > document.querySelector('.P-box__inner').clientHeight) {
+                    paymentHelper.style.overflowY = 'scroll';
+                }
+            }
 
             //header
             that.paymentHeaderTitle.textContent = 'Confirming Payment';
@@ -733,9 +740,11 @@
 
         var paymentStartScreen = document.querySelector('.P-Payment__start');
         var paymentConfirming = document.querySelector('.P-Payment__confirming');
+        var paymentConfirmingHelper = document.querySelector('.P-Payment__confirming-helper');
         var paymentConfirmed = document.querySelector('.P-Payment__confirmed');
         paymentStartScreen.style.display = 'none';
         paymentConfirming.style.display = 'none';
+        paymentConfirmingHelper.style.display = 'none';
         paymentConfirmed.removeAttribute('style');
 
         //header
