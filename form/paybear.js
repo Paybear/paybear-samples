@@ -78,6 +78,7 @@
             redirectTimeout: 5,
             minOverpaymentFiat: 1,
             maxUnderpaymentFiat: 0.01,
+            statusInterval: 10000,
         };
 
         this.options = defaults;
@@ -186,7 +187,6 @@
                         handleCurrenciesSuccess();
                         var currencies = response;
                         if (Object.prototype.toString.call(response) === '[object Object]') {
-                            console.log(response.title);
                             if (response.title) { // single currency
                                 currencies = [response];
                             } else {
@@ -568,7 +568,7 @@
                 xhr.open('GET', url, true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send();
-            }, 10000);
+            }, options.statusInterval);
         }
     }
 
