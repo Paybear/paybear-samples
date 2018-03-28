@@ -12,9 +12,9 @@ if (isset($_GET['token'])) {
 	$data = getCurrency($token, $orderId, true);
 } else {
 	$data = array();
-	foreach(getCurrencies() as $currency) {
-		$currency = getCurrency($currency['code'], $orderId);
-		if ($currency) $data[] = $currency;
+	foreach(getCurrencies() as $key => $currency) {
+		$currency = getCurrency($key, $orderId);
+		if ($currency) $data[$key] = $currency;
 	}
 }
 
