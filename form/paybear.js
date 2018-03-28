@@ -182,11 +182,30 @@
             } else {
                 try {
                     var response = JSON.parse(xhr.responseText);
-                    if (Array.isArray(response) || response.title) {
+                    if (Array.isArray(response) || Object.prototype.toString.call(response) === '[object Object]') {
                         handleCurrenciesSuccess();
                         var currencies = response;
-                        if (response.title) {
-                            currencies = [response];
+                        if (Object.prototype.toString.call(response) === '[object Object]') {
+                            console.log(response.title);
+                            if (response.title) { // single currency
+                                currencies = [response];
+                            } else {
+                                function isNumber(n) {
+                                    return !isNaN(parseFloat(n)) && isFinite(n);
+                                }
+
+                                currencies = [];
+                                for(var i in response) {
+                                    if (response.hasOwnProperty(i)) {
+                                        if (isNumber(i)) {
+                                            currencies[i] = response[i];
+                                        } else {
+                                            currencies.push(response[i]);
+                                        }
+                                    }
+                                }
+                            }
+
                         }
                         state.currencies  = currencies;
 
@@ -200,6 +219,7 @@
                         handleCurrenciesError.call(that);
                     }
                 } catch(e) {
+                    console.log(e);
                     handleCurrenciesError.call(that);
                 }
             }
@@ -253,6 +273,7 @@
                                 that.state.selected = index;
                                 paymentStart.call(that);
                             } catch(e) {
+                                console.log(e);
                                 handleCurrencyError.call(that);
                             }
                         }
