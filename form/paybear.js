@@ -430,7 +430,7 @@
 
         // coin value
         var value = document.querySelector('.P-Payment__value__coins');
-        var coinsPaid = selectedCoin.coinsPaid ? selectedCoin.coinsPaid : 0;
+        var coinsPaid = selectedCoin.coinsPaid || 0;
         var coinsToPay = (selectedCoin.coinsValue - coinsPaid).toFixed(8);
         if ((+coinsToPay).toString().length < 6) document.querySelector('.P-Payment__value').classList.add('P-Payment__value--flex');
         value.textContent = +coinsToPay + ' ' + selectedCoin.code;
@@ -538,7 +538,7 @@
                             if (response.coinsPaid) {
                                 if (response.coinsPaid > coinsPaid) {
                                     var maxUnderpaymentCrypto = +(options.maxUnderpaymentFiat / selectedCoin.rate).toFixed(8);
-                                    var diff = +(selectedCoin.coinsValue - coinsPaid - response.coinsPaid).toFixed(8);
+                                    var diff = +(selectedCoin.coinsValue - response.coinsPaid).toFixed(8);
                                     selectedCoin.coinsPaid = response.coinsPaid;
 
                                     if (response.coinsPaid < selectedCoin.coinsValue - maxUnderpaymentCrypto) {
