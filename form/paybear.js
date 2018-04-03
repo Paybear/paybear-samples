@@ -238,6 +238,7 @@
         fillCoinsReset.call(that);
 
         bindUnloadHandler.call(that);
+        if (that.handleDocumentVisibility) document.removeEventListener('visibilitychange', that.handleDocumentVisibility);
 
         var coinsContainer = that.coinsBlock;
         coinsContainer.innerHTML = '';
@@ -400,7 +401,19 @@
         // timer
         if (options.timer) {
             that.paymentHeaderTimer.textContent = formatTimer(options.timer);
+            var time = new Date();
+            var endTime = new Date(time.setSeconds(time.getSeconds() + that.defaultTimer));
+            var currentTime = new Date();
+            that.handleDocumentVisibility = function() {
+                if (document.visibilityState ===  'visible' && currentTime > endTime &&
+                    document.querySelector('.P-Payment__start').offsetWidth > 0) {
+                    paymentExpired.call(that);
+                }
+            };
+            document.addEventListener('visibilitychange', that.handleDocumentVisibility);
+
             state.interval = setInterval(function() {
+                currentTime = new Date();
                 var timer = options.timer - 1;
                 if (timer < 1) {
                     paymentExpired.call(that);
@@ -612,6 +625,7 @@
         var state = that.state;
         clearInterval(state.interval);
         clearInterval(state.checkStatusInterval);
+        if (that.handleDocumentVisibility) document.removeEventListener('visibilitychange', that.handleDocumentVisibility);
         var paymentExpired = document.querySelector('.P-Payment__expired');
         var paymentStartScreen = document.querySelector('.P-Payment__start');
         var unpaidScreen = document.querySelector('.P-Payment__unpaid');
@@ -685,6 +699,7 @@
             var paymentStartScreen = document.querySelector('.P-Payment__start');
             var paymentConfirming = document.querySelector('.P-Payment__confirming');
             paymentStartScreen.style.display = 'none';
+            if (that.handleDocumentVisibility) document.removeEventListener('visibilitychange', that.handleDocumentVisibility);
             paymentConfirming.removeAttribute('style');
 
             // helper
@@ -764,6 +779,7 @@
         var paymentConfirmingHelper = document.querySelector('.P-Payment__confirming-helper');
         var paymentConfirmed = document.querySelector('.P-Payment__confirmed');
         paymentStartScreen.style.display = 'none';
+        if (that.handleDocumentVisibility) document.removeEventListener('visibilitychange', that.handleDocumentVisibility);
         paymentConfirming.style.display = 'none';
         paymentConfirmingHelper.style.display = 'none';
         paymentConfirmed.removeAttribute('style');
