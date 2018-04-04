@@ -405,9 +405,16 @@
             var endTime = new Date(time.setSeconds(time.getSeconds() + that.defaultTimer));
             var currentTime = new Date();
             that.handleDocumentVisibility = function() {
-                if (document.visibilityState ===  'visible' && currentTime > endTime &&
+                if (document.visibilityState === 'visible' &&
                     document.querySelector('.P-Payment__start').offsetWidth > 0) {
-                    paymentExpired.call(that);
+                    var timeDiff = Math.abs(currentTime.getTime() - endTime.getTime());
+                    var timeDiffSec = Math.round(timeDiff / 1000);
+                    var desync = Math.abs(options.timer - timeDiffSec) > 1;
+                    if (desync && currentTime <= endTime) {
+                        options.timer = timeDiffSec;
+                    } else if (currentTime > endTime) {
+                        paymentExpired.call(that);
+                    }
                 }
             };
             document.addEventListener('visibilitychange', that.handleDocumentVisibility);
