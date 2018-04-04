@@ -78,7 +78,7 @@
             redirectTimeout: 5,
             minOverpaymentFiat: 1,
             maxUnderpaymentFiat: 0.01,
-            statusInterval: 10000,
+            statusInterval: 10,
         };
 
         this.options = defaults;
@@ -588,7 +588,7 @@
                 xhr.open('GET', url, true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send();
-            }, options.statusInterval);
+            }, options.statusInterval * 1000);
         }
     }
 
