@@ -46,6 +46,7 @@ function getCurrency($token, $orderId, $getAddress = false) {
 		if (isset($currencies[$token])) {
 			$currency               = $currencies[ $token ];
 			$currency['coinsValue'] = $coinsValue;
+			$currency['rate'] = $rate;
 
 			if ( $getAddress ) {
 				$currency['address'] = getAddress( $orderId, $token );
