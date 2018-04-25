@@ -6,6 +6,16 @@
             window.paybear = undefined;
         }
 
+        this.state = {
+            checkStatusInterval: null,
+            interval: null,
+            selected: 0,
+            isConfirming: false,
+            html: null,
+            isModalShown: false,
+            unloadBound: false,
+        };
+
         var that = this;
         var options;
         if (arguments[0] && typeof arguments[0] === "object") {
@@ -57,15 +67,6 @@
     };
 
     function paybearInit() {
-        this.state = {
-            checkStatusInterval: null,
-            interval: null,
-            selected: 0,
-            isConfirming: false,
-            html: null,
-            isModalShown: false,
-            unloadBound: false,
-        };
 
         var defaults = {
             timer: 15 * 60,
@@ -562,7 +563,7 @@
                                     selectedCoin.coinsPaid = response.coinsPaid;
 
                                     if (response.coinsPaid < selectedCoin.coinsValue - maxUnderpaymentCrypto) {
-                                        paymentUnpaid.call(that, diff);
+                                        paymentUnpaid.call(that, diff, response.coinsPaid);
                                     } else {
                                         checkConfirmations = true;
                                     }
@@ -592,7 +593,7 @@
         }
     }
 
-    function paymentUnpaid(diff) {
+    function paymentUnpaid(diff, paid) {
         var that = this;
         var state = that.state;
         var options = that.options;
@@ -606,19 +607,30 @@
         that.topBackButton.style.display = 'none';
         unpaidScreen.removeAttribute('style');
 
-        var unpaidScreenBtn = unpaidScreen.querySelector('button');
-        unpaidScreenBtn.innerHTML =
-            'Pay ' + diff + ' ' +
-            selectedCoin.code + ' (' + options.fiatSign +
-            (Math.round(selectedCoin.rate * diff * 100) / 100).toFixed(2) +
-            '&nbsp;' + options.fiatCurrency + ')';
+        var unpaidScreenBtn = unpaidScreen.querySelector('.P-btn');
+        var unpaidDue = document.querySelectorAll('.P-Payment__unpaid__due');
+        var unpaidPaid = document.querySelectorAll('.P-Payment__unpaid__paid');
+        var unpaidUnderpaid = document.querySelectorAll('.P-Payment__unpaid__underpaid');
+        var unpaidPaidFiat = document.querySelectorAll('.P-Payment__unpaid__paidFiat');
 
-        unpaidScreenBtn.addEventListener('click', function toStartScreen() {
-            unpaidScreen.style.display = 'none';
-            that.paymentHeader.removeAttribute('style');
-            paymentStart.call(that, true);
-            unpaidScreenBtn.removeEventListener('click', toStartScreen);
-        });
+        setInnerHtml(unpaidDue, selectedCoin.coinsValue + ' ' + selectedCoin.code);
+        setInnerHtml(unpaidPaid, paid + ' ' + selectedCoin.code);
+        setInnerHtml(unpaidUnderpaid, diff + '&nbsp;' + selectedCoin.code);
+        setInnerHtml(unpaidPaidFiat, options.fiatSign + (Math.round(selectedCoin.rate * paid * 100) / 100).toFixed(2));
+
+        if (options.underpaidUrl || options.underpaidText) {
+            if (options.underpaidUrl) unpaidScreenBtn.href = options.underpaidUrl;
+            if (options.underpaidText) unpaidScreenBtn.innerHTML = options.underpaidText;
+        } else {
+            unpaidScreenBtn.addEventListener('click', function toStartScreen(e) {
+                e.preventDefault();
+                unpaidScreen.style.display = 'none';
+                that.paymentHeader.removeAttribute('style');
+                paymentStart.call(that, true);
+                unpaidScreenBtn.removeEventListener('click', toStartScreen);
+            });
+        }
+
     }
 
     function paymentExpired() {
@@ -1225,6 +1237,12 @@
         if (options.unloadHandler && that.state.unloadBound) {
             that.state.unloadBound = false;
             window.removeEventListener('beforeunload', options.unloadHandler);
+        }
+    }
+
+    function setInnerHtml(elem, html) {
+        for(var i = 0; i < elem.length; i++) {
+            elem[i].innerHTML = html;
         }
     }
 

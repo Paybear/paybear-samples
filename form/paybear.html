@@ -115,12 +115,26 @@
                                 <div class="P-Content__icon">
                                     <img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjI1OC45OTgyIiB2aWV3Qm94PSIwIDAgMjk4LjMyNTEzIDI1OC45OTgyIiB3aWR0aD0iMjk4LjMyNTEzIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0yNzguNzc0MTkgMjU4Ljk5ODJoLTI1OS41NDgzODNjLTEwLjYxODA1MyAwLTE5LjIyNTgwNy04LjU4ODk3LTE5LjIyNTgwNy0xOS4xODUxOCAwLTIuOTQ4NTMgMC0xNC44MTM2MiAxLTEwLjgxMzYyIDIuMzQ0NTEwMiA5LjM3ODA0IDEwLjU2MjUyNS0xOC4zNzE1NyAxOC4yMjU4MDctMTguMzcxNTdoMjU5LjU0ODM4M2M4LjMzMzA1IDAgMTYuNTU4MDggNi4zMjIxMyAxOS4yMjU4MSAxNi4zNzE1Ny43MzE1MiAyLjc1NTY2IDAgMTAuNTMzNDQgMCAxMi44MTM2MiAwIDEwLjU5NjIxLTguNjA3NzUgMTkuMTg1MTgtMTkuMjI1ODEgMTkuMTg1MTh6IiBmaWxsPSIjY2Q0MTJkIi8+PHBhdGggZD0ibTEzNC42MDQwOCA5LjYzMzk2MWM4LjI2NzY5LTEyLjM2NTQ1MSAxOS45MTU1My0xMy4zMTYzMTcgMjguODA1NjYgMGwxMjkuNTk0NTUgMjA2LjEwODgzOWM5LjYwMzI5IDE0LjM3MDMxIDQuNzk2ODQgMjQuMDcwMjItOS42MDI2OSAyNC4wNzAyMmgtMjY4LjgwNTYwOGMtMTQuNDAwNzI5OSAwLTE5LjIwMjM3NTEtOS43MDExMS05LjYwMDg4NzItMjQuMDcwMjJ6IiBmaWxsPSIjZjA1ZjUwIi8+PHBhdGggZD0ibTEzOC43MDEzIDE2MS45ODc4MWgxNy41NTQ0N2MyLjY4NTAzIDAgNC44OTA3LTIuMTIwNjggNC45OTYxNC00LjgwMzY0bDMuMzQwMTYtODQuOTg4NDA5Yy4xMDg0NC0yLjc1OTMtMi4wNDA1LTUuMDg0MDYtNC43OTk3OS01LjE5MjUtLjA2NTQtLjAwMy0uMTMwODgtLjAwNC0uMTk2MzUtLjAwNGgtMjQuMjM0NzhjLTIuNzYxNDMgMC01IDIuMjM4NTgtNSA1IDAgLjA2NTUuMDAxLjEzMDk0LjAwNC4xOTYzNmwzLjM0MDE2IDg0Ljk4ODQwOWMuMTA1NDQgMi42ODI5NiAyLjMxMTExIDQuODAzNjQgNC45OTYxNCA0LjgwMzY0em0tMTEuMDI5MyAzMC40ODc1NWMwIDExLjE5OTUxIDguOTE4MTMgMTkuMjg4MDQgMTkuNDk1NDQgMTkuMjg4MDQgMTAuNzg0NzEgMCAxOS45MTAyMy04LjA4ODUzIDE5LjkxMDIzLTE5LjI4ODA0IDAtMTAuOTkyMTEtOS4xMjU1Mi0xOC44NzMyNC0xOS45MTAyMy0xOC44NzMyNC0xMC41NzczMSAwLTE5LjQ5NTQ0IDcuODgxMTMtMTkuNDk1NDQgMTguODczMjR6IiBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=">
                                 </div>
-                                <h2>Hmm... Looks like you underpaid</h2>
-                                <p>Please pay the difference to successfully process your order.</p>
+                                <h2>Oops. You underpaid by <span class="P-Payment__unpaid__underpaid">---</span>!</h2>
+                                <div class="P-Payment__unpaid__block">
+                                    <div>
+                                        <div>DUE</div>
+                                        <span class="P-Payment__unpaid__due">---</span>
+                                    </div>
+                                    <div>
+                                        <div>YOU PAID</div>
+                                        <span class="P-Payment__unpaid__paid">---</span>
+                                    </div>
+                                    <div>
+                                        <div>UNDERPAID</div>
+                                        <span class="P-Payment__unpaid__underpaid">---</span>
+                                    </div>
+                                </div>
+                                <p>But don’t worry, we credited <span class="P-Payment__unpaid__paid">---</span> (<span class="P-Payment__unpaid__paidFiat">---</span>) to your LeoList giftcard.</p>
                                 <div>
-                                    <button class="P-btn P-btn--primary">
-                                        Proceed
-                                    </button>
+                                    <a href="#" class="P-btn P-btn--primary">
+                                        Continue
+                                    </a>
                                 </div>
                             </div>
                         </div>
