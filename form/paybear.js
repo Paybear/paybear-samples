@@ -460,7 +460,9 @@
         if (options.enableFiatTotal && options.fiatValue) {
             document.querySelector('.P-Payment__value__price').removeAttribute('style');
             var fiatValue = coinsPaid > 0 ? Math.round(selectedCoin.rate * coinsToPay * 100) / 100 : options.fiatValue;
-            document.querySelector('.P-Payment__value__price').innerHTML = options.fiatSign + '<span>' + (+fiatValue).toFixed(2) + '</span>&nbsp;' + options.fiatCurrency;
+            var priceHTML = options.fiatSign + (+fiatValue).toFixed(2);
+            var discountedHTML = '<span class="P-Payment__value__price__line">' + priceHTML + '</span>&nbsp;' + options.fiatSign + (+options.fiatValueDiscounted).toFixed(2) + '&nbsp;';
+            document.querySelector('.P-Payment__value__price').innerHTML = (options.fiatValueDiscounted && !coinsPaid) ? discountedHTML + options.fiatCurrency : priceHTML + '&nbsp;' + options.fiatCurrency;
         }
 
 
@@ -1211,6 +1213,7 @@
 
     function handleModalOverlay() {
         var that = this;
+        that.root.style.height = 'auto';
         var overlay = document.querySelector('.PayBearModal__Overlay');
         var newOverlay = overlay.cloneNode(true);
 
@@ -1218,6 +1221,7 @@
 
         newOverlay.addEventListener('click', function errorClose() {
             hideModal.call(that);
+            that.root.removeAttribute('style');
             this.removeEventListener('click', errorClose, false);
         }, false);
     }
