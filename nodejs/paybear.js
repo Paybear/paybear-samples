@@ -55,6 +55,7 @@ function getCurrency(token, orderId, getAddr, callback) {
       var currency = null;
 
       getCurrencies(function(currencies) {
+          token = token.toLowerCase();
           currency = currencies[token];
           currency['coinsValue'] = coinsValue;
 
