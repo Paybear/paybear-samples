@@ -3,7 +3,6 @@ var https = require('https');
 var PAYBEAR_SECRET = 'secAPIKEY';
 
 function getAddress(orderId, token, callback) {
-  var payoutAddress = getPayout(token);
   var callbackUrl = 'http://CHANGEME.com/payBear/callback/' + orderId;
   var url = 'https://api.paybear.io/v2/' + token.toLowerCase() + '/payment/' + '?token=' + PAYBEAR_SECRET;
 
@@ -104,6 +103,7 @@ function getRates(callback) {
 module.exports = {
   getAddress: getAddress,
   getCurrency: getCurrency,
+  getCurrencies: getCurrencies,
   getRate: getRate,
   getRates: getRates
 };
